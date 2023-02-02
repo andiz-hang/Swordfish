@@ -1,0 +1,30 @@
+.Banner {
+  border-bottom: 0.1rem solid black;
+  grid-column: 1/-1;
+
+  display: grid;
+  grid-template-columns: 10em auto 10em;
+}
+
+.banner-pagename {
+  display: flex;
+  transition: .1s ease-out;
+  font-size: 1.2em;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-pagename:hover {
+  cursor: pointer;
+  background-color: lightblue;
+}
+
+.search-bar {
+  margin: 1.5em 1em;
+}
+
+.banner-menu {
+  background-color: lightblue;
+}
