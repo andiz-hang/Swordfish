@@ -4,8 +4,8 @@ import "./App.css";
 
 import Banner from "./components/Banner";
 import Sidebar from "./components/Sidebar";
-// import ApiHandler from "./components/ApiHandler";
 import InfoPage from "./components/InfoPage";
+import ApiHandler from "./components/ApiHandler";
 
 class App extends Component {
   state = {
@@ -13,8 +13,14 @@ class App extends Component {
     currentStock: "",
   };
 
-  handleUpdateStock = (ticker) => {
-    this.setState({ currentStock: ticker.toUpperCase() });
+  handleUpdateStock = async (ticker) => {
+    const api = new ApiHandler();
+    var symbol = ticker.toUpperCase();
+
+    const res = await api.getStockData(symbol);
+    console.log(res); // DEBUG
+
+    this.setState({ currentStock: symbol });
   };
 
   handleAddStock = (ticker) => {

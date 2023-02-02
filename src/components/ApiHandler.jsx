@@ -1,13 +1,20 @@
-const KEY = "K48RVJHYH25YVVH9";
 class ApiHandler {
   #formatAPIString(func, ticker) {
     return `https://www.alphavantage.co/query?function=${func}&symbol=${ticker}&apikey=K48RVJHYH25YVVH9`;
   }
 
-  getStockData(ticker) {
-    const response = fetch(this.#formatAPIString("OVERVIEW", ticker)).json();
+  // #testFormatAPIString() {
+  //   return "https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=demo";
+  // }
 
-    return response[("Name", "Sector", "Industry")];
+  async getStockData(ticker) {
+    const response = await fetch(this.#formatAPIString("OVERVIEW", ticker));
+    const res = await response.json();
+    return {
+      Name: res["Name"],
+      Sector: res["Sector"],
+      Industry: res["Industry"],
+    };
   }
 }
 
