@@ -1,9 +1,9 @@
 .Banner {
-  border-bottom: 0.1rem solid black;
   grid-column: 1/-1;
 
   display: grid;
   grid-template-columns: 15rem auto;
+  background-color: #325ddb;
 }
 
 .banner-pagename {
@@ -14,14 +14,19 @@
   height: 100%;
   align-items: center;
   justify-content: center;
+
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 2px rgb(0, 0, 0);
 }
 
 .banner-pagename:hover {
   cursor: pointer;
-  background-color: lightblue;
+  background-color: #5475da;
 }
 
 .search-bar {
   margin: 1.5rem 1rem;
   width: 20rem;
+  border: 3px solid rgb(60, 60, 60);
 }
