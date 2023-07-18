@@ -1,5 +1,5 @@
 .Sidebar {
-  border-right: 0.1em solid black;
+  border-right: 0.1rem solid black;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -9,22 +9,22 @@
 .sidebar-header {
   display: flex;  
   font-weight: bold;
-  height: 3em;
-  border-bottom: 0.1em solid black;
+  height: 3rem;
+  border-bottom: 0.1rem solid black;
   align-items: center;
 }
 
 .sidebar-header>* {
-  margin: 1em;
+  margin: 1rem;
 }
 
 .sidebar-item {
   display: flex;
-  height: 5em;
-  border-bottom: 0.1em solid black;
+  height: 5rem;
+  border-bottom: 0.1rem solid black;
   align-items: center;
   justify-content: center;
-  font-size: 0.8em;
+  font-size: 0.8rem;
 
   background: linear-gradient(to left, white 50%, lightgray 50%) right;
   background-size: 200%;

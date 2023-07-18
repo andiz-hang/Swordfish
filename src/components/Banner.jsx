@@ -28,7 +28,7 @@ class Banner extends Component {
           className="banner-pagename"
           onClick={() => this.props.onUpdateStock("")}
         >
-          Stock Analysis Tool
+          A Good App Name
         </div>
 
         <input
@@ -38,10 +38,6 @@ class Banner extends Component {
           onChange={this.updateInput}
           onKeyDown={this.onKeyPressed}
         />
-
-        <div className="banner-menu">
-          <h4>Menu</h4>
-        </div>
       </header>
     );
   }
