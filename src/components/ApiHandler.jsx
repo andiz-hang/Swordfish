@@ -27,7 +27,7 @@ const api = {
     // const response = await fetch(formatAPIString("CASH_FLOW", ticker));
     const response = await fetch(
       "https://www.alphavantage.co/query?function=CASH_FLOW&symbol=IBM&apikey=demo"
-    ); // TESTING
+    ); // TODO: TESTING
     const res = await response.json();
     const reports = res["annualReports"];
 

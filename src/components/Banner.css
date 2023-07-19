@@ -1,5 +1,5 @@
 .Banner {
-  grid-column: 1/-1;
+  grid-column: 1/3;
 
   display: grid;
   grid-template-columns: 15rem auto;

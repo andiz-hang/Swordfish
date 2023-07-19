@@ -2,5 +2,5 @@
   display: grid;
   grid-template-rows: 5rem auto;
   grid-template-columns: 10rem auto;
-  height: 100vh
+  height: 100vh;
 } 

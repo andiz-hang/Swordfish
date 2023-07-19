@@ -5,3 +5,31 @@
 .InfoPage>h1 {
   font-size: 2rem;
 }
+
+.StatsBar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.StatsBar>h1 {
+  font-size: 1.5rem;
+}
+
+.GraphDisplayPanel {
+  display: grid;
+  grid-template-columns: 25rem 25rem 25rem;
+
+  margin-bottom: 2rem;
+}
+
+.DividendBar {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.DividendBar>h1 {
+  font-size: 1.5rem;
+}
