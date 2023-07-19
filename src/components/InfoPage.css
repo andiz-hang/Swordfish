@@ -10,8 +10,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  background-color: lightblue;
+
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .StatsBar>h1 {
@@ -26,6 +28,7 @@
   display: grid;
   grid-template-columns: 25rem 25rem 25rem;
 
+  margin-top: 1rem;
   margin-bottom: 2rem;
 }
 
