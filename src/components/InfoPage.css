@@ -18,6 +18,10 @@
   font-size: 1.5rem;
 }
 
+.ChartContainer {
+  margin-right: 1rem;
+}
+
 .GraphDisplayPanel {
   display: grid;
   grid-template-columns: 25rem 25rem 25rem;
