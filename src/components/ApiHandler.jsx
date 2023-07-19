@@ -31,6 +31,30 @@ const api = {
       revenue: res,
     };
   },
+
+  getRevenueTEST: async (ticker) => {
+    const year = [];
+
+    for (var i = 2003; i < 2023; i++) {
+      year.push(i);
+    }
+
+    const revenue = [];
+    if (ticker === "AAPL") {
+      for (var i = 1; i < 21; i++) {
+        revenue.push(i * 1500000);
+      }
+    } else {
+      for (var i = 1; i < 21; i++) {
+        revenue.push(i * 1000000);
+      }
+    }
+
+    return {
+      year: year.map((y) => y.toString()),
+      revenue: revenue,
+    };
+  },
 };
 
 export default api;

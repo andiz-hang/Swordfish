@@ -20,14 +20,17 @@ class StockInfo extends Component {
     );
   }
 
-  componentDidUpdate() {
-    this.setState({
-      isRevenueDataLoading: true,
-    });
+  componentDidUpdate(prevProps) {
+    // LINE BELOW IS NECESSARY
+    if (prevProps.stock != this.props.stock) {
+      this.setState({
+        isRevenueDataLoading: true,
+      });
 
-    revenue(this.props.stock).then((res) =>
-      this.setState({ revenueData: res, isRevenueDataLoading: false })
-    );
+      revenue(this.props.stock).then((res) =>
+        this.setState({ revenueData: res, isRevenueDataLoading: false })
+      );
+    }
   }
 
   render() {
