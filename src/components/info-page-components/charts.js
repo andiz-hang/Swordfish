@@ -27,18 +27,20 @@ export const LineChart = (props) => {
     <Line
       // datasetIdKey='id'
       data={props.chartData}
+      options={props.options}
     />
   );
 };
 
 export const BarChart = (props) => {
 
-  console.log("BarChart", props.chartData);
+  // console.log("BarChart", props.chartData);
 
   return (
     <Bar
-      datasetIdKey={props.id}
+      // datasetIdKey={props.id}
       data={props.chartData}
+      options={props.options}
     />
   );
 };

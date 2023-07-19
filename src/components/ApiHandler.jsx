@@ -1,45 +1,35 @@
-function formatAPIString(func, ticker) {
-  return `https://www.alphavantage.co/query?function=${func}&symbol=${ticker}&apikey=K48RVJHYH25YVVH9`;
+function APIString20years(func, ticker) {
+  return `https://public-api.quickfs.net/v1/data/${ticker}/${func}?period=FY-19:FY&api_key=84560ad55be389e07b7999dbad32766e3baf7c4a`;
 }
 
 // helper functions go in here
 const api = {
-  getStockData: async (ticker) => {
-    const response = await fetch(formatAPIString("OVERVIEW", ticker));
-    const res = await response.json();
+  getRevenue: async (ticker) => {
+    const response = await fetch(APIString20years("revenue", ticker));
+    console.log("GET revenue for " + ticker); // DEBUG
+    var res = await response.json();
+
+    // get the years of the revenue
+    const response2 = await fetch(APIString20years("period_end_date", ticker));
+    console.log("GET period_end_date for " + ticker); // DEBUG
+    var year = await response2.json();
+
+    res = res["data"];
+    year = year["data"];
+
+    // Remove years with no data
+    while (year[0] === 0) {
+      year.shift(); // Remove the first element of array
+      res.shift(); // Remove the first element of array
+    }
+
+    // change date from "YYYY-MM" format to "YYYY"
+    year = year.map((date) => date.slice(0, 4));
+
     return {
-      Name: res["Name"],
-      Sector: res["Sector"],
-      Industry: res["Industry"],
+      year: year,
+      revenue: res,
     };
-  },
-
-  // getIncomeStatement: async (ticker) => {
-  //   const response = await fetch(formatAPIString("INCOME_STATEMENT", ticker));
-  //   const res = await response.json();
-  //   return {
-  //     interestExpense: res["interestExpense"],
-  //     cashflowFromInvestment: res["cashflowFromInvestment"],
-  //   };
-  // },
-
-  getCFStatement: async (ticker) => {
-    // const response = await fetch(formatAPIString("CASH_FLOW", ticker));
-    const response = await fetch(
-      "https://www.alphavantage.co/query?function=CASH_FLOW&symbol=IBM&apikey=demo"
-    ); // TODO: TESTING
-    const res = await response.json();
-    const reports = res["annualReports"];
-
-    return reports.map((report) => {
-      const date = new Date(report["fiscalDateEnding"]);
-
-      return {
-        year: date.getFullYear(),
-        operatingCashflow: report["operatingCashflow"],
-        capitalExpenditures: report["capitalExpenditures"],
-      };
-    });
   },
 };
 

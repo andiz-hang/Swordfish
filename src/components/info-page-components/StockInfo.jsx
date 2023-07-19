@@ -1,25 +1,37 @@
 import React, { Component } from "react";
 import { TestChart } from "./charts"; //DEBUG
 import { BarChart, LineChart } from "./charts";
-import { getFCF } from "./data";
+import { getFCF, revenue } from "./data";
 
 class StockInfo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      chartData: {},
-      isLoading: true,
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
+  state = {
+    testData: {},
+    revenueData: {},
+
+    isRevenueDataLoading: true,
+  };
 
   componentDidMount() {
-    getFCF(this.props.stock).then((res) =>
-      this.setState({ chartData: res, isLoading: false })
+    revenue(this.props.stock).then((res) =>
+      this.setState({ revenueData: res, isRevenueDataLoading: false })
+    );
+  }
+
+  componentDidUpdate() {
+    this.setState({
+      isRevenueDataLoading: true,
+    });
+
+    revenue(this.props.stock).then((res) =>
+      this.setState({ revenueData: res, isRevenueDataLoading: false })
     );
   }
 
   render() {
-    if (this.state.isLoading) {
+    if (this.state.isRevenueDataLoading) {
       return <h1>Retrieving Financial Data...</h1>;
     } else {
       return (
@@ -34,19 +46,19 @@ class StockInfo extends Component {
 
           <div className="GraphDisplayPanel">
             <div className="ChartContainer">
-              <BarChart id="freeCashFlow" chartData={this.state.chartData} />
+              <BarChart id="freeCashFlow" chartData={this.state.revenueData} />
             </div>
             <div className="ChartContainer">
-              <BarChart id="test1" chartData={this.state.chartData} />
+              <BarChart id="test1" chartData={this.state.revenueData} />
             </div>
             <div className="ChartContainer">
-              <LineChart id="test2" chartData={this.state.chartData} />
+              <LineChart id="test2" chartData={this.state.revenueData} />
             </div>
           </div>
 
           <div className="DividendBar">
             <div className="ChartContainer">
-              <BarChart id="freeCashFlow" chartData={this.state.chartData} />
+              <BarChart id="freeCashFlow" chartData={this.state.revenueData} />
             </div>
             <h1>Current Dividend Yield: 200%</h1>
           </div>

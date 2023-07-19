@@ -8,15 +8,15 @@ class InfoPage extends Component {
   render() {
     if (this.props.stock === "") {
       return <Home />;
+    } else {
+      return (
+        <StockInfo
+          onAddStock={this.props.onAddStock}
+          stock={this.props.stock}
+          CFData={this.props.CFData}
+        />
+      );
     }
-
-    return (
-      <StockInfo
-        onAddStock={this.props.onAddStock}
-        stock={this.props.stock}
-        CFData={this.props.CFData}
-      />
-    );
   }
 }
 
