@@ -36,11 +36,11 @@ const api = {
 
     const revenue = [0, 0];
     if (ticker === "AAPL") {
-      for (var i = 3; i < 21; i++) {
+      for (let i = 3; i < 21; i++) {
         revenue.push(i * 1500000);
       }
     } else {
-      for (var i = 3; i < 21; i++) {
+      for (let i = 3; i < 21; i++) {
         revenue.push(i * 1000000);
       }
     }
@@ -54,16 +54,6 @@ const api = {
 
     var profits = await response.json();
     return profits["data"];
-  },
-
-  getGrossProfitTEST: async (ticker) => {
-    console.log(`GrossProfits (TEST) for ${ticker}`);
-
-    const profits = [];
-    for (var i = 1; i < 21; i++) {
-      profits.push(i);
-    }
-    return profits;
   },
 
   getGrossProfitTEST: async (ticker) => {

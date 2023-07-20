@@ -36,7 +36,7 @@ class StockInfo extends Component {
 
   componentDidUpdate(prevProps) {
     // LINE BELOW IS NECESSARY!!!
-    if (prevProps.stock != this.props.stock) {
+    if (prevProps.stock !== this.props.stock) {
       this.resetState();
       this.updateState();
     }
