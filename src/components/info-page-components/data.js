@@ -1,10 +1,10 @@
-export function revenueConfigs(years, data) {
+export function revenueConfigs(years, data, legendLabel) {
   const settings = {
     // labels are filled with years in StockInfo.jsx
     labels: years,
     datasets: [
       {
-        label: 'Revenue (Millions of $)',
+        label: legendLabel,
         id: 1,
         data: data.map((r) => r / 1000000),
       }

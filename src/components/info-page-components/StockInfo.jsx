@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BarChart, LineChart } from "./charts";
+import { BarChart } from "./charts";
 import { revenueConfigs } from "./data";
 import api from "../ApiHandler";
 
@@ -60,30 +60,33 @@ class StockInfo extends Component {
             <div className="ChartContainer">
               <h2 className="ChartLabel">Annual Revenue</h2>
               <BarChart
-                id="freeCashFlow"
+                id="revenue"
                 chartData={revenueConfigs(
                   this.state.yearsData,
-                  this.state.revenueData
+                  this.state.revenueData,
+                  "Revenue (Millions of $)"
                 )}
               />
             </div>
             <div className="ChartContainer">
               <h2 className="ChartLabel">Gross Profit</h2>
               <BarChart
-                id="test1"
+                id="grossProfit"
                 chartData={revenueConfigs(
                   this.state.yearsData,
-                  this.state.revenueData
+                  this.state.revenueData,
+                  "Profit (Millions of $)"
                 )}
               />
             </div>
             <div className="ChartContainer">
               <h2 className="ChartLabel">Operating Profit</h2>
-              <LineChart
-                id="test2"
+              <BarChart
+                id="operationalProfit"
                 chartData={revenueConfigs(
                   this.state.yearsData,
-                  this.state.revenueData
+                  this.state.revenueData,
+                  "Profit (Millions of $)"
                 )}
               />
             </div>
@@ -93,10 +96,11 @@ class StockInfo extends Component {
             <div className="ChartContainer">
               <h2 className="ChartLabel">Dividends Per Share</h2>
               <BarChart
-                id="freeCashFlow"
+                id="dividend"
                 chartData={revenueConfigs(
                   this.state.yearsData,
-                  this.state.revenueData
+                  this.state.revenueData,
+                  "Dividends ($ per Share)"
                 )}
               />
             </div>
