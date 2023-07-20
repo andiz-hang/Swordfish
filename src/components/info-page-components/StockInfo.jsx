@@ -53,7 +53,10 @@ class StockInfo extends Component {
           <div className="StatsBar">
             <h1>Current Price: $500000</h1>
             <h1>P/E Ratio: 100</h1>
+            <h1>10-Year FCF Growth: $1000</h1>
+            <h1>Market Cap: $500m</h1>
             <h1>EPS: 1$</h1>
+            <h1>10-Year ROIC: 20%</h1>
           </div>
 
           <div className="GraphDisplayPanel">

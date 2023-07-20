@@ -65,6 +65,16 @@ const api = {
     }
     return profits;
   },
+
+  getGrossProfitTEST: async (ticker) => {
+    console.log(`GrossProfits (TEST) for ${ticker}`);
+
+    const profits = [];
+    for (var i = 1; i < 21; i++) {
+      profits.push(i);
+    }
+    return profits;
+  },
 };
 
 export default api;
