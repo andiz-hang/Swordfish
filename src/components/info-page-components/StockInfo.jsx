@@ -1,40 +1,49 @@
 import React, { Component } from "react";
-import { TestChart } from "./charts"; //DEBUG
 import { BarChart, LineChart } from "./charts";
-import { getFCF, revenue } from "./data";
+import { revenueConfigs } from "./data";
+import api from "../ApiHandler";
 
 class StockInfo extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
   state = {
-    testData: {},
+    yearsData: {},
+    isYearsLoading: true,
     revenueData: {},
-
     isRevenueDataLoading: true,
   };
 
+  updateState() {
+    api
+      .getYearsTEST(this.props.stock)
+      .then((res) => this.setState({ yearsData: res, isYearsLoading: false }));
+
+    api
+      .getRevenueTEST(this.props.stock)
+      .then((res) =>
+        this.setState({ revenueData: res, isRevenueDataLoading: false })
+      );
+  }
+
+  resetState() {
+    this.setState({
+      isYearsLoading: true,
+      isRevenueDataLoading: true,
+    });
+  }
+
   componentDidMount() {
-    revenue(this.props.stock).then((res) =>
-      this.setState({ revenueData: res, isRevenueDataLoading: false })
-    );
+    this.updateState();
   }
 
   componentDidUpdate(prevProps) {
-    // LINE BELOW IS NECESSARY
+    // LINE BELOW IS NECESSARY!!!
     if (prevProps.stock != this.props.stock) {
-      this.setState({
-        isRevenueDataLoading: true,
-      });
-
-      revenue(this.props.stock).then((res) =>
-        this.setState({ revenueData: res, isRevenueDataLoading: false })
-      );
+      this.resetState();
+      this.updateState();
     }
   }
 
   render() {
-    if (this.state.isRevenueDataLoading) {
+    if (this.state.isYearsLoading || this.state.isRevenueDataLoading) {
       return <h1>Retrieving Financial Data...</h1>;
     } else {
       return (
@@ -49,19 +58,47 @@ class StockInfo extends Component {
 
           <div className="GraphDisplayPanel">
             <div className="ChartContainer">
-              <BarChart id="freeCashFlow" chartData={this.state.revenueData} />
+              <h2 className="ChartLabel">Annual Revenue</h2>
+              <BarChart
+                id="freeCashFlow"
+                chartData={revenueConfigs(
+                  this.state.yearsData,
+                  this.state.revenueData
+                )}
+              />
             </div>
             <div className="ChartContainer">
-              <BarChart id="test1" chartData={this.state.revenueData} />
+              <h2 className="ChartLabel">Gross Profit</h2>
+              <BarChart
+                id="test1"
+                chartData={revenueConfigs(
+                  this.state.yearsData,
+                  this.state.revenueData
+                )}
+              />
             </div>
             <div className="ChartContainer">
-              <LineChart id="test2" chartData={this.state.revenueData} />
+              <h2 className="ChartLabel">Operating Profit</h2>
+              <LineChart
+                id="test2"
+                chartData={revenueConfigs(
+                  this.state.yearsData,
+                  this.state.revenueData
+                )}
+              />
             </div>
           </div>
 
           <div className="DividendBar">
             <div className="ChartContainer">
-              <BarChart id="freeCashFlow" chartData={this.state.revenueData} />
+              <h2 className="ChartLabel">Dividends Per Share</h2>
+              <BarChart
+                id="freeCashFlow"
+                chartData={revenueConfigs(
+                  this.state.yearsData,
+                  this.state.revenueData
+                )}
+              />
             </div>
             <h1>Current Dividend Yield: 200%</h1>
           </div>

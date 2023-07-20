@@ -1,16 +1,15 @@
-import api from "../ApiHandler";
-
-export async function revenue(ticker) {
-  const data = await api.getRevenueTEST(ticker);
-
+export function revenueConfigs(years, data) {
   const settings = {
-    labels: data.year,
+    // labels are filled with years in StockInfo.jsx
+    labels: years,
     datasets: [
       {
+        label: 'Revenue (Millions of $)',
         id: 1,
-        data: data.revenue,
+        data: data.map((r) => r / 1000000),
       }
-    ]
+    ],
   }
+
   return settings;
 }
