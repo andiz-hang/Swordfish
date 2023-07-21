@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BarChart } from "./charts";
-import { numberWithCommas, revenueConfigs } from "./data";
+import dataFuncs from "./data";
 import { getAPIData } from "../ApiHandler";
 
 class StockInfo extends Component {
@@ -44,15 +44,19 @@ class StockInfo extends Component {
 
           <div className="StatsBar">
             <h1>
-              Last Close Price: ${numberWithCommas(this.state.data.stats.price)}
+              Last Close Price: $
+              {dataFuncs.numberWithCommas(this.state.data.stats.price)}
             </h1>
-            <h1>P/E Ratio: {numberWithCommas(this.state.data.stats.pe)}</h1>
-            <h1>Placeholder: </h1>
             <h1>
-              Market Cap: ${numberWithCommas(this.state.data.stats.mktCap)}M
+              P/E Ratio: {dataFuncs.numberWithCommas(this.state.data.stats.pe)}
             </h1>
-            <h1>Placeholder: </h1>
-            <h1>Placeholder: </h1>
+            <h1>Placeholder </h1>
+            <h1>
+              Market Cap: $
+              {dataFuncs.numberWithCommas(this.state.data.stats.mktCap)}M
+            </h1>
+            <h1>Placeholder </h1>
+            <h1>Placeholder </h1>
           </div>
 
           <div className="GraphDisplayPanel">
@@ -60,10 +64,9 @@ class StockInfo extends Component {
               <h2 className="ChartLabel">Annual Revenue</h2>
               <BarChart
                 id="revenue"
-                chartData={revenueConfigs(
+                chartData={dataFuncs.revenueConfigs(
                   this.state.data.years,
-                  this.state.data.revenue,
-                  "Revenue (Millions of $)"
+                  this.state.data.revenue
                 )}
               />
             </div>
@@ -71,10 +74,9 @@ class StockInfo extends Component {
               <h2 className="ChartLabel">Gross Profit</h2>
               <BarChart
                 id="grossProfit"
-                chartData={revenueConfigs(
+                chartData={dataFuncs.grossConfigs(
                   this.state.data.years,
-                  this.state.data.revenue,
-                  "Profit (Millions of $)"
+                  this.state.data.gross
                 )}
               />
             </div>
@@ -82,24 +84,19 @@ class StockInfo extends Component {
               <h2 className="ChartLabel">Operating Profit</h2>
               <BarChart
                 id="operationalProfit"
-                chartData={revenueConfigs(
+                chartData={dataFuncs.operatingConfigs(
                   this.state.data.years,
-                  this.state.data.revenue,
-                  "Profit (Millions of $)"
+                  this.state.data.operating
                 )}
               />
             </div>
-          </div>
-
-          <div className="DividendBar">
             <div className="ChartContainer">
               <h2 className="ChartLabel">Dividends Per Share</h2>
               <BarChart
                 id="dividend"
-                chartData={revenueConfigs(
+                chartData={dataFuncs.dividendsConfigs(
                   this.state.data.years,
-                  this.state.data.revenue,
-                  "Dividends ($ per Share)"
+                  this.state.data.dividends
                 )}
               />
             </div>

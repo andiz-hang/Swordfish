@@ -1,23 +1,29 @@
-function APIString(func, ticker) {
-  return `https://public-api.quickfs.net/v1/data/${ticker}/${func}?api_key=84560ad55be389e07b7999dbad32766e3baf7c4a`;
-}
+const formatString = {
+  default: (func, ticker) => {
+    return `https://public-api.quickfs.net/v1/data/${ticker}/${func}?api_key=84560ad55be389e07b7999dbad32766e3baf7c4a`;
+  },
 
-function APIString20years(func, ticker) {
-  return `https://public-api.quickfs.net/v1/data/${ticker}/${func}?period=FY-19:FY&api_key=84560ad55be389e07b7999dbad32766e3baf7c4a`;
-}
+  years20: (func, ticker) => {
+    return `https://public-api.quickfs.net/v1/data/${ticker}/${func}?period=FY-19:FY&api_key=84560ad55be389e07b7999dbad32766e3baf7c4a`;
+  },
 
-function APIString10years(func, ticker) {
-  return `https://public-api.quickfs.net/v1/data/${ticker}/${func}?period=FY-9:FY&api_key=84560ad55be389e07b7999dbad32766e3baf7c4a`;
-}
+  years10: (func, ticker) => {
+    return `https://public-api.quickfs.net/v1/data/${ticker}/${func}?period=FY-9:FY&api_key=84560ad55be389e07b7999dbad32766e3baf7c4a`;
+  },
+};
 
 // helper functions go in here
 const apiFuncs = {
-  getYears: async (ticker) => {
-    const response2 = await fetch(APIString20years("period_end_date", ticker));
-    console.log("GET period_end_date for " + ticker); // DEBUG
-    var year = await response2.json();
-
-    return year["data"];
+  getStatsTEST: async (ticker) => {
+    return {
+      price: 1,
+      pe: 2,
+      fcf: 3,
+      mktCap: 4,
+      eps: 5,
+      roic: 6,
+      divYld: 7,
+    };
   },
 
   getYearsTEST: async (ticker) => {
@@ -31,15 +37,7 @@ const apiFuncs = {
     return year;
   },
 
-  getRevenue: async (ticker) => {
-    const response = await fetch(APIString20years("revenue", ticker));
-    console.log("GET revenue for " + ticker); // DEBUG
-    var res = await response.json();
-
-    return res["data"];
-  },
-
-  getRevenueTEST: async (ticker) => {
+  getDataTEST: async (ticker) => {
     console.log(`Revenue (TEST) for ${ticker} stock.`);
 
     const revenue = [0, 0];
@@ -56,71 +54,86 @@ const apiFuncs = {
     return revenue;
   },
 
-  // WARNING Untested!!!!
-  getGrossProfit: async (ticker) => {
-    const response = await fetch(APIString20years("gross_profit", ticker));
-
-    var profits = await response.json();
-    return profits["data"];
-  },
-
-  getGrossProfit: async (ticker) => {
-    const response = await fetch(APIString20years("gross_profit", ticker));
-
-    var profits = await response.json();
-    return profits["data"];
-  },
-
-  // WARNING Untested!!!!
   getStats: async (ticker) => {
-    const responsePrice = await fetch(APIString("price", ticker));
-    const responsePE = await fetch(APIString("pe", ticker));
-    // const responseFCF = await fetch(APIString10years("fcf_growth", ticker));
-    const responseMktCap = await fetch(APIString("mkt_cap", ticker));
-    // const responseEPS = await fetch(APIString("eps_diluted", ticker));
-    // const responseROIC = await fetch(APIString10years("roic", ticker));
-    // const responseDivs = await fetch(APIString("dividends", ticker));
+    const responsePrice = await fetch(formatString.default("price", ticker));
+    const responsePE = await fetch(formatString.default("pe", ticker));
+    const responseMktCap = await fetch(formatString.default("mkt_cap", ticker));
+    console.log("GET 'price' for " + ticker); // DEBUG
+    console.log("GET 'pe' for " + ticker); // DEBUG
+    console.log("GET 'mkt_cap' for " + ticker); // DEBUG
 
     const price = await responsePrice.json();
     const PE = await responsePE.json();
-    // const FCF = await responseFCF.json();
     const MktCap = await responseMktCap.json();
-    // const EPS = await responseEPS.json();
-    // const ROIC = await responseROIC.json();
-    // const Divs = await responseDivs.json();
 
     return {
       price: price["data"],
       pe: PE["data"],
-      // fcf: FCF["data"],
       mktCap: MktCap["data"],
-      // eps: EPS["data"],
-      // roic: ROIC["data"],
-      // divYld: (Divs["data"] / price["data"]) * 100,
     };
   },
 
-  getStatsTEST: async (ticker) => {
-    return {
-      price: 1,
-      pe: 2,
-      fcf: 3,
-      mktCap: 4,
-      eps: 5,
-      roic: 6,
-      divYld: 7,
-    };
+  getYears: async (ticker) => {
+    const response2 = await fetch(
+      formatString.years20("period_end_date", ticker)
+    );
+    console.log("GET 'period_end_date' for " + ticker); // DEBUG
+    var year = await response2.json();
+
+    return year["data"];
+  },
+
+  getRevenue: async (ticker) => {
+    const response = await fetch(formatString.years20("revenue", ticker));
+    console.log("GET revenue for " + ticker); // DEBUG
+    var res = await response.json();
+
+    return res["data"];
+  },
+
+  getGrossProfit: async (ticker) => {
+    const response = await fetch(formatString.years20("gross_profit", ticker));
+    console.log("GET 'gross_profit' for " + ticker); // DEBUG
+
+    var profits = await response.json();
+    return profits["data"];
+  },
+
+  getOperatingProfit: async (ticker) => {
+    const response = await fetch(
+      formatString.years20("operating_income", ticker)
+    );
+    console.log("GET 'operating_income' for " + ticker); // DEBUG
+
+    var profits = await response.json();
+    return profits["data"];
+  },
+
+  getDividends: async (ticker) => {
+    const response = await fetch(formatString.years20("dividends", ticker));
+    console.log("GET 'dividends' for " + ticker); // DEBUG
+
+    var dividends = await response.json();
+    return dividends["data"];
   },
 };
 
 export async function getAPIData(ticker) {
-  const years = await apiFuncs.getYearsTEST(ticker);
-  const revenue = await apiFuncs.getRevenueTEST(ticker);
-  const stats = await apiFuncs.getStatsTEST(ticker);
+  const years = await apiFuncs.getYears(ticker);
+  const revenue = await apiFuncs.getRevenue(ticker);
+  const stats = await apiFuncs.getStats(ticker);
+  const gross = await apiFuncs.getGrossProfit(ticker);
+  const operating = await apiFuncs.getOperatingProfit(ticker);
+  const dividends = await apiFuncs.getDividends(ticker);
+
+  console.log(gross / 1000000);
 
   return {
     years: years,
     revenue: revenue,
     stats: stats,
+    gross: gross.map((x) => x / 1000000),
+    operating: operating.map((x) => x / 1000000),
+    dividends: dividends,
   };
 }
