@@ -1,26 +1,18 @@
 import React, { Component } from "react";
 import { BarChart } from "./charts";
-import { revenueConfigs } from "./data";
-import api from "../ApiHandler";
+import { numberWithCommas, revenueConfigs } from "./data";
+import { getAPIData } from "../ApiHandler";
 
 class StockInfo extends Component {
   state = {
-    yearsData: {},
-    isYearsLoading: true,
-    revenueData: {},
-    isRevenueDataLoading: true,
+    data: {},
+    isDataLoading: true,
   };
 
   updateState() {
-    api
-      .getYearsTEST(this.props.stock)
-      .then((res) => this.setState({ yearsData: res, isYearsLoading: false }));
-
-    api
-      .getRevenueTEST(this.props.stock)
-      .then((res) =>
-        this.setState({ revenueData: res, isRevenueDataLoading: false })
-      );
+    getAPIData(this.props.stock).then((res) =>
+      this.setState({ data: res, isDataLoading: false })
+    );
   }
 
   resetState() {
@@ -43,7 +35,7 @@ class StockInfo extends Component {
   }
 
   render() {
-    if (this.state.isYearsLoading || this.state.isRevenueDataLoading) {
+    if (this.state.isDataLoading) {
       return <h1>Retrieving Financial Data...</h1>;
     } else {
       return (
@@ -51,12 +43,16 @@ class StockInfo extends Component {
           <h1>Current Stock: {this.props.stock}</h1>
 
           <div className="StatsBar">
-            <h1>Current Price: $500000</h1>
-            <h1>P/E Ratio: 100</h1>
-            <h1>10-Year FCF Growth: $1000</h1>
-            <h1>Market Cap: $500m</h1>
-            <h1>EPS: 1$</h1>
-            <h1>10-Year ROIC: 20%</h1>
+            <h1>
+              Last Close Price: ${numberWithCommas(this.state.data.stats.price)}
+            </h1>
+            <h1>P/E Ratio: {numberWithCommas(this.state.data.stats.pe)}</h1>
+            <h1>Placeholder: </h1>
+            <h1>
+              Market Cap: ${numberWithCommas(this.state.data.stats.mktCap)}M
+            </h1>
+            <h1>Placeholder: </h1>
+            <h1>Placeholder: </h1>
           </div>
 
           <div className="GraphDisplayPanel">
@@ -65,8 +61,8 @@ class StockInfo extends Component {
               <BarChart
                 id="revenue"
                 chartData={revenueConfigs(
-                  this.state.yearsData,
-                  this.state.revenueData,
+                  this.state.data.years,
+                  this.state.data.revenue,
                   "Revenue (Millions of $)"
                 )}
               />
@@ -76,8 +72,8 @@ class StockInfo extends Component {
               <BarChart
                 id="grossProfit"
                 chartData={revenueConfigs(
-                  this.state.yearsData,
-                  this.state.revenueData,
+                  this.state.data.years,
+                  this.state.data.revenue,
                   "Profit (Millions of $)"
                 )}
               />
@@ -87,8 +83,8 @@ class StockInfo extends Component {
               <BarChart
                 id="operationalProfit"
                 chartData={revenueConfigs(
-                  this.state.yearsData,
-                  this.state.revenueData,
+                  this.state.data.years,
+                  this.state.data.revenue,
                   "Profit (Millions of $)"
                 )}
               />
@@ -101,13 +97,12 @@ class StockInfo extends Component {
               <BarChart
                 id="dividend"
                 chartData={revenueConfigs(
-                  this.state.yearsData,
-                  this.state.revenueData,
+                  this.state.data.years,
+                  this.state.data.revenue,
                   "Dividends ($ per Share)"
                 )}
               />
             </div>
-            <h1>Current Dividend Yield: 200%</h1>
           </div>
 
           <button onClick={() => this.props.onAddStock(this.props.stock)}>

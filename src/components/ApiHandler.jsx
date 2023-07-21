@@ -1,9 +1,17 @@
+function APIString(func, ticker) {
+  return `https://public-api.quickfs.net/v1/data/${ticker}/${func}?api_key=84560ad55be389e07b7999dbad32766e3baf7c4a`;
+}
+
 function APIString20years(func, ticker) {
   return `https://public-api.quickfs.net/v1/data/${ticker}/${func}?period=FY-19:FY&api_key=84560ad55be389e07b7999dbad32766e3baf7c4a`;
 }
 
+function APIString10years(func, ticker) {
+  return `https://public-api.quickfs.net/v1/data/${ticker}/${func}?period=FY-9:FY&api_key=84560ad55be389e07b7999dbad32766e3baf7c4a`;
+}
+
 // helper functions go in here
-const api = {
+const apiFuncs = {
   getYears: async (ticker) => {
     const response2 = await fetch(APIString20years("period_end_date", ticker));
     console.log("GET period_end_date for " + ticker); // DEBUG
@@ -56,15 +64,63 @@ const api = {
     return profits["data"];
   },
 
-  getGrossProfitTEST: async (ticker) => {
-    console.log(`GrossProfits (TEST) for ${ticker}`);
+  getGrossProfit: async (ticker) => {
+    const response = await fetch(APIString20years("gross_profit", ticker));
 
-    const profits = [];
-    for (var i = 1; i < 21; i++) {
-      profits.push(i);
-    }
-    return profits;
+    var profits = await response.json();
+    return profits["data"];
+  },
+
+  // WARNING Untested!!!!
+  getStats: async (ticker) => {
+    const responsePrice = await fetch(APIString("price", ticker));
+    const responsePE = await fetch(APIString("pe", ticker));
+    // const responseFCF = await fetch(APIString10years("fcf_growth", ticker));
+    const responseMktCap = await fetch(APIString("mkt_cap", ticker));
+    // const responseEPS = await fetch(APIString("eps_diluted", ticker));
+    // const responseROIC = await fetch(APIString10years("roic", ticker));
+    // const responseDivs = await fetch(APIString("dividends", ticker));
+
+    const price = await responsePrice.json();
+    const PE = await responsePE.json();
+    // const FCF = await responseFCF.json();
+    const MktCap = await responseMktCap.json();
+    // const EPS = await responseEPS.json();
+    // const ROIC = await responseROIC.json();
+    // const Divs = await responseDivs.json();
+
+    return {
+      price: price["data"],
+      pe: PE["data"],
+      // fcf: FCF["data"],
+      mktCap: MktCap["data"],
+      // eps: EPS["data"],
+      // roic: ROIC["data"],
+      // divYld: (Divs["data"] / price["data"]) * 100,
+    };
+  },
+
+  getStatsTEST: async (ticker) => {
+    return {
+      price: 1,
+      pe: 2,
+      fcf: 3,
+      mktCap: 4,
+      eps: 5,
+      roic: 6,
+      divYld: 7,
+    };
   },
 };
 
-export default api;
+export async function getAPIData(ticker) {
+  const years = await apiFuncs.getYearsTEST(ticker);
+  const revenue = await apiFuncs.getRevenueTEST(ticker);
+  const stats = await apiFuncs.getStatsTEST(ticker);
+
+  return {
+    years: years,
+    revenue: revenue,
+    stats: stats,
+  };
+}
