@@ -47,7 +47,7 @@ class Banner extends Component {
 
             const usage = await res.json();
             alert(
-              `Number of API Calls Remaining: ${usage["usage"]["quota"]["remaining"]}`
+              `Number of API calls remaining today: ${usage["usage"]["quota"]["remaining"]}`
             );
           }}
         >
