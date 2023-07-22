@@ -12,6 +12,7 @@ const dataFuncs = {
           label: "Revenue (Millions of $)",
           id: 1,
           data: data.map((r) => r / 1000000),
+          backgroundColor: "rgba(43, 217, 255)",
         }
       ],
     }
@@ -27,6 +28,7 @@ const dataFuncs = {
           label: "Profit (Millions of $)",
           id: 1,
           data: data,
+          backgroundColor: "rgba(230, 216, 32)",
         }
       ],
     }
@@ -42,6 +44,7 @@ const dataFuncs = {
           label: "Profit (Millions of $)",
           id: 1,
           data: data,
+          backgroundColor: "rgba(209, 28, 0)",
         }
       ],
     }
@@ -57,7 +60,8 @@ const dataFuncs = {
           label: "Dividends ($ per Share)",
           id: 1,
           data: data,
-        }
+          backgroundColor: "rgba(0, 171, 46)",
+        },
       ],
     }
     return settings;

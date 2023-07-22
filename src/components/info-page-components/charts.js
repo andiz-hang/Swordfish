@@ -1,5 +1,6 @@
 import { Bar, Line } from "react-chartjs-2";
 
+// THESE IMPORTS ARE IMPORTANT DO NOT DELETE
 import { Chart as ChartJS } from "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 
