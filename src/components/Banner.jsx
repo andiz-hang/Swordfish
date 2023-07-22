@@ -46,7 +46,7 @@ class Banner extends Component {
             );
 
             const usage = await res.json();
-            console.log(
+            alert(
               `Number of API Calls Remaining: ${usage["usage"]["quota"]["remaining"]}`
             );
           }}
