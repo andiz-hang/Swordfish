@@ -38,6 +38,21 @@ class Banner extends Component {
           onChange={this.updateInput}
           onKeyDown={this.onKeyPressed}
         />
+
+        <button
+          onClick={async () => {
+            const res = await fetch(
+              "https://public-api.quickfs.net/v1/usage?api_key=84560ad55be389e07b7999dbad32766e3baf7c4a"
+            );
+
+            const usage = await res.json();
+            console.log(
+              `Number of API Calls Remaining: ${usage["usage"]["quota"]["remaining"]}`
+            );
+          }}
+        >
+          Check remaining API Calls (DEBUG)
+        </button>
       </header>
     );
   }
