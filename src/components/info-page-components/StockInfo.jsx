@@ -91,12 +91,32 @@ class StockInfo extends Component {
               />
             </div>
             <div className="ChartContainer">
+              <h2 className="ChartLabel">EPS</h2>
+              <BarChart
+                id="dividend"
+                chartData={dataFuncs.epsConfigs(
+                  this.state.data.years,
+                  this.state.data.eps
+                )}
+              />
+            </div>
+            <div className="ChartContainer">
               <h2 className="ChartLabel">Dividends Per Share</h2>
               <BarChart
                 id="dividend"
                 chartData={dataFuncs.dividendsConfigs(
                   this.state.data.years,
                   this.state.data.dividends
+                )}
+              />
+            </div>
+            <div className="ChartContainer">
+              <h2 className="ChartLabel">Annual ROIC</h2>
+              <BarChart
+                id="dividend"
+                chartData={dataFuncs.roicConfigs(
+                  this.state.data.years,
+                  this.state.data.roic
                 )}
               />
             </div>

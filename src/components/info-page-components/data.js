@@ -51,6 +51,22 @@ const dataFuncs = {
     return settings;
   },
 
+  epsConfigs: (years, data) => {
+    const settings = {
+      // labels are filled with years in StockInfo.jsx
+      labels: years,
+      datasets: [
+        {
+          label: "Earnings ($ per share)",
+          id: 1,
+          data: data,
+          backgroundColor: "rgba(250, 180, 67)",
+        },
+      ],
+    }
+    return settings;
+  },
+
   dividendsConfigs: (years, data) => {
     const settings = {
       // labels are filled with years in StockInfo.jsx
@@ -61,6 +77,22 @@ const dataFuncs = {
           id: 1,
           data: data,
           backgroundColor: "rgba(0, 171, 46)",
+        },
+      ],
+    }
+    return settings;
+  },
+
+  roicConfigs: (years, data) => {
+    const settings = {
+      // labels are filled with years in StockInfo.jsx
+      labels: years,
+      datasets: [
+        {
+          label: "Return on Invested Capital (%)",
+          id: 1,
+          data: data,
+          backgroundColor: "rgba(138, 28, 255)",
         },
       ],
     }

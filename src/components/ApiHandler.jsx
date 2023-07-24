@@ -6,16 +6,13 @@ const formatString = {
   years20: (func, ticker) => {
     return `https://public-api.quickfs.net/v1/data/${ticker}/${func}?period=FY-19:FY&api_key=84560ad55be389e07b7999dbad32766e3baf7c4a`;
   },
-
-  years10: (func, ticker) => {
-    return `https://public-api.quickfs.net/v1/data/${ticker}/${func}?period=FY-9:FY&api_key=84560ad55be389e07b7999dbad32766e3baf7c4a`;
-  },
 };
 
 // helper functions go in here
 const apiFuncs = {
   getStatsTEST: async (ticker) => {
     return {
+      name: "Company Name",
       price: 1,
       pe: 2,
       fcf: 3,
@@ -114,12 +111,28 @@ const apiFuncs = {
     return profits["data"];
   },
 
+  getEPS: async (ticker) => {
+    const response = await fetch(formatString.years20("diluted_eps", ticker));
+    console.log("GET 'eps' for " + ticker); // DEBUG
+
+    var eps = await response.json();
+    return eps["data"];
+  },
+
   getDividends: async (ticker) => {
     const response = await fetch(formatString.years20("dividends", ticker));
     console.log("GET 'dividends' for " + ticker); // DEBUG
 
     var dividends = await response.json();
     return dividends["data"];
+  },
+
+  getROIC: async (ticker) => {
+    const response = await fetch(formatString.years20("roic", ticker));
+    console.log("GET 'roic' for " + ticker); // DEBUG
+
+    var roic = await response.json();
+    return roic["data"];
   },
 };
 
@@ -129,14 +142,18 @@ export async function getAPIData(ticker) {
   // const revenue = await apiFuncs.getRevenue(ticker);
   // const gross = await apiFuncs.getGrossProfit(ticker);
   // const operating = await apiFuncs.getOperatingProfit(ticker);
+  // const eps = await apiFuncs.getEPS(ticker);
   // const dividends = await apiFuncs.getDividends(ticker);
+  // const roic = await apiFuncs.getROIC(ticker);
 
   const stats = await apiFuncs.getStatsTEST(ticker);
   const years = await apiFuncs.getYearsTEST(ticker);
   const revenue = await apiFuncs.getDataTEST(ticker);
   const gross = await apiFuncs.getDataTEST(ticker);
   const operating = await apiFuncs.getDataTEST(ticker);
+  const eps = await apiFuncs.getDataTEST(ticker);
   const dividends = await apiFuncs.getDataTEST(ticker);
+  const roic = await apiFuncs.getDataTEST(ticker);
 
   return {
     years: years,
@@ -144,6 +161,8 @@ export async function getAPIData(ticker) {
     stats: stats,
     gross: gross.map((x) => x / 1000000),
     operating: operating.map((x) => x / 1000000),
+    eps: eps,
     dividends: dividends,
+    roic: roic,
   };
 }
