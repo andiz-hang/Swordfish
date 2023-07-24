@@ -40,7 +40,7 @@ class StockInfo extends Component {
     } else {
       return (
         <main className="InfoPage">
-          <h1>Current Stock: {this.props.stock}</h1>
+          <h1>{this.state.data.stats.name}</h1>
 
           <div className="StatsBar">
             <h1>

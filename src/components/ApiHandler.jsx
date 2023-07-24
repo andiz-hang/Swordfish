@@ -55,18 +55,23 @@ const apiFuncs = {
   },
 
   getStats: async (ticker) => {
+    const responseName = await fetch(formatString.default("name", ticker));
     const responsePrice = await fetch(formatString.default("price", ticker));
     const responsePE = await fetch(formatString.default("pe", ticker));
     const responseMktCap = await fetch(formatString.default("mkt_cap", ticker));
+
+    console.log("GET 'name' for " + ticker); // DEBUG
     console.log("GET 'price' for " + ticker); // DEBUG
     console.log("GET 'pe' for " + ticker); // DEBUG
     console.log("GET 'mkt_cap' for " + ticker); // DEBUG
 
+    const name = await responseName.json();
     const price = await responsePrice.json();
     const PE = await responsePE.json();
     const MktCap = await responseMktCap.json();
 
     return {
+      name: name["data"],
       price: price["data"],
       pe: PE["data"],
       mktCap: MktCap["data"],
@@ -119,6 +124,13 @@ const apiFuncs = {
 };
 
 export async function getAPIData(ticker) {
+  // const stats = await apiFuncs.getStats(ticker);
+  // const years = await apiFuncs.getYears(ticker);
+  // const revenue = await apiFuncs.getRevenue(ticker);
+  // const gross = await apiFuncs.getGrossProfit(ticker);
+  // const operating = await apiFuncs.getOperatingProfit(ticker);
+  // const dividends = await apiFuncs.getDividends(ticker);
+
   const stats = await apiFuncs.getStatsTEST(ticker);
   const years = await apiFuncs.getYearsTEST(ticker);
   const revenue = await apiFuncs.getDataTEST(ticker);
