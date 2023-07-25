@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { BarChart } from "./charts";
-import dataFuncs from "./data";
-import { getAPIData } from "../ApiHandler";
+import { dataFuncs, getData } from "./data";
 
 class StockInfo extends Component {
   state = {
@@ -10,15 +9,14 @@ class StockInfo extends Component {
   };
 
   updateState() {
-    getAPIData(this.props.stock).then((res) =>
-      this.setState({ data: res, isDataLoading: false })
-    );
+    getData(this.props.stock).then((res) => {
+      this.setState({ data: res, isDataLoading: false });
+    });
   }
 
   resetState() {
     this.setState({
-      isYearsLoading: true,
-      isRevenueDataLoading: true,
+      isDataLoading: true,
     });
   }
 
@@ -43,20 +41,12 @@ class StockInfo extends Component {
           <h1>{this.state.data.stats.name}</h1>
 
           <div className="StatsBar">
-            <h1>
-              Last Close Price: $
-              {dataFuncs.numberWithCommas(this.state.data.stats.price)}
-            </h1>
-            <h1>
-              P/E Ratio: {dataFuncs.numberWithCommas(this.state.data.stats.pe)}
-            </h1>
-            <h1>Placeholder </h1>
-            <h1>
-              Market Cap: $
-              {dataFuncs.numberWithCommas(this.state.data.stats.mktCap)}M
-            </h1>
-            <h1>Placeholder </h1>
-            <h1>Placeholder </h1>
+            <h1>Last Close Price: ${this.state.data.stats.price}</h1>
+            <h1>P/E Ratio: {this.state.data.stats.pe}</h1>
+            <h1>P/B Ratio: {this.state.data.stats.pb}</h1>
+            <h1>Market Cap: ${this.state.data.stats.mktCap}M</h1>
+            <h1>P/EG Ratio: {this.state.data.stats.peg}</h1>
+            <h1>Beta: {this.state.data.stats.beta}</h1>
           </div>
 
           <div className="GraphDisplayPanel">

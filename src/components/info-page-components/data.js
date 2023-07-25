@@ -1,8 +1,10 @@
-const dataFuncs = {
-  numberWithCommas: (num) => {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  },
+import { getAPIData } from "../ApiHandler";
 
+function numberWithCommas(num) {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+export const dataFuncs = {
   revenueConfigs: (years, data) => {
     const settings = {
       // labels are filled with years in StockInfo.jsx
@@ -27,7 +29,7 @@ const dataFuncs = {
         {
           label: "Profit (Millions of $)",
           id: 1,
-          data: data,
+          data: data.map((x) => x / 1000000),
           backgroundColor: "rgba(230, 216, 32)",
         }
       ],
@@ -43,7 +45,7 @@ const dataFuncs = {
         {
           label: "Profit (Millions of $)",
           id: 1,
-          data: data,
+          data: data.map((x) => x / 1000000),
           backgroundColor: "rgba(209, 28, 0)",
         }
       ],
@@ -91,7 +93,7 @@ const dataFuncs = {
         {
           label: "Return on Invested Capital (%)",
           id: 1,
-          data: data,
+          data: data.map((x) => x * 100),
           backgroundColor: "rgba(138, 28, 255)",
         },
       ],
@@ -100,4 +102,11 @@ const dataFuncs = {
   },
 };
 
-export default dataFuncs;
+export async function getData(ticker) {
+  return await getAPIData(ticker).then((x) => {
+    x["stats"]["price"] = numberWithCommas(x["stats"]["price"]);
+    x["stats"]["mktCap"] = numberWithCommas(x["stats"]["mktCap"]);
+
+    return x;
+  });
+}
