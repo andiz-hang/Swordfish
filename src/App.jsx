@@ -11,10 +11,14 @@ class App extends Component {
   state = {
     sidebarStocks: ["AAPL", "TSLA"],
     currentStock: "",
+    currentMainPage: "Home",
   };
 
-  handleUpdateStock = (ticker) => {
-    this.setState({ currentStock: ticker.toUpperCase() });
+  handleUpdatePage = (page, ticker) => {
+    this.setState({
+      currentMainPage: page,
+      currentStock: ticker.toUpperCase(),
+    });
   };
 
   handleAddStock = (ticker) => {
@@ -31,14 +35,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Banner onUpdateStock={this.handleUpdateStock} />
+        <Banner onUpdatePage={this.handleUpdatePage} />
         <Sidebar
           stocks={this.state.sidebarStocks}
-          onUpdateStock={this.handleUpdateStock}
           currentStock={this.state.currentStock}
+          onUpdatePage={this.handleUpdatePage}
         />
         <MainPage
           stock={this.state.currentStock}
+          page={this.state.currentMainPage}
           onAddStock={this.handleAddStock}
         />
       </div>

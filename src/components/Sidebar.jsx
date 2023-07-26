@@ -18,7 +18,7 @@ class Sidebar extends Component {
           <li
             key={stockName}
             className="sidebar-item selected"
-            onClick={() => this.props.onUpdateStock(stockName)}
+            onClick={() => this.props.onUpdatePage("StockInfo", stockName)}
           >
             <span>{stockName}</span>
           </li>
@@ -28,7 +28,7 @@ class Sidebar extends Component {
           <li
             key={stockName}
             className="sidebar-item"
-            onClick={() => this.props.onUpdateStock(stockName)}
+            onClick={() => this.props.onUpdatePage("StockInfo", stockName)}
           >
             <span>{stockName}</span>
           </li>
@@ -36,7 +36,7 @@ class Sidebar extends Component {
       }
     }
 
-    // DEBUG
+    // vvvvv DEBUG vvvvv
     sidebarItems.push(
       <button
         onClick={async () => {

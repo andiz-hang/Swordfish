@@ -15,9 +15,8 @@ class Banner extends Component {
   }
 
   onKeyPressed(key) {
-    console.log(key);
     if (key.keyCode === 13) {
-      this.props.onUpdateStock(this.state.searchBarInput);
+      this.props.onUpdatePage("StockInfo", this.state.searchBarInput);
     }
   }
 
@@ -26,7 +25,7 @@ class Banner extends Component {
       <header className="Banner">
         <div
           className="banner-pagename"
-          onClick={() => this.props.onUpdateStock("")}
+          onClick={() => this.props.onUpdatePage("Home", "")}
         >
           A Good App Name
         </div>
@@ -40,10 +39,16 @@ class Banner extends Component {
         />
 
         <ul className="nav-bar">
-          <h6 className="nav-text" onClick={() => this.props.onUpdateStock("")}>
+          <h6
+            className="nav-text"
+            onClick={() => this.props.onUpdatePage("Home", "")}
+          >
             Home
           </h6>
-          <h6 className="nav-text" onClick={() => this.props.onUpdateStock("")}>
+          <h6
+            className="nav-text"
+            onClick={() => this.props.onUpdatePage("Info", "")}
+          >
             Info
           </h6>
         </ul>
