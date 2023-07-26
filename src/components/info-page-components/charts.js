@@ -1,21 +1,23 @@
 import { Bar, Line } from "react-chartjs-2";
 
 // THESE IMPORTS ARE IMPORTANT DO NOT DELETE
+// eslint-disable-next-line
 import { Chart as ChartJS } from "chart.js/auto";
+// eslint-disable-next-line
 import { Chart } from "react-chartjs-2";
 
-export const LineChart = (props) => {
+export const BarChart = (props) => {
   return (
-    <Line
+    <Bar
       data={props.chartData}
       options={props.options}
     />
   );
 };
 
-export const BarChart = (props) => {
+export const LineChart = (props) => {
   return (
-    <Bar
+    <Line
       data={props.chartData}
       options={props.options}
     />

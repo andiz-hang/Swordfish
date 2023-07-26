@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BarChart } from "./charts";
+import { BarChart, LineChart } from "./charts";
 import { dataFuncs, getData } from "./data";
 
 class StockInfo extends Component {
@@ -102,7 +102,7 @@ class StockInfo extends Component {
             </div>
             <div className="ChartContainer">
               <h2 className="ChartLabel">Annual ROIC</h2>
-              <BarChart
+              <LineChart
                 id="dividend"
                 chartData={dataFuncs.roicConfigs(
                   this.state.data.years,
