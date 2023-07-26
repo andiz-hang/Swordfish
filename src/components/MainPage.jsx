@@ -1,10 +1,10 @@
-import "./InfoPage.css";
+import "./MainPage.css";
 import React, { Component } from "react";
 
-import Home from "./info-page-components/Home.jsx";
-import StockInfo from "./info-page-components/StockInfo.jsx";
+import Home from "./main-page-components/Home.jsx";
+import StockInfo from "./main-page-components/StockInfo.jsx";
 
-class InfoPage extends Component {
+class MainPage extends Component {
   render() {
     if (this.props.stock === "") {
       return <Home />;
@@ -20,4 +20,4 @@ class InfoPage extends Component {
   }
 }
 
-export default InfoPage;
+export default MainPage;

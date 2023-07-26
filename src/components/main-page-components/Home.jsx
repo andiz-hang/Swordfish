@@ -4,7 +4,7 @@ class Home extends Component {
   // state = {  }
   render() {
     return (
-      <main className="InfoPage">
+      <main className="MainPage">
         <h1>Welcome to the Site!</h1>
 
         <h2>Tips:</h2>

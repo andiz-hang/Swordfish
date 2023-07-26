@@ -34,10 +34,14 @@ class StockInfo extends Component {
 
   render() {
     if (this.state.isDataLoading) {
-      return <h1>Retrieving Financial Data...</h1>;
+      return (
+        <main className="MainPage">
+          <h1>Retrieving Financial Data...</h1>
+        </main>
+      );
     } else {
       return (
-        <main className="InfoPage">
+        <main className="MainPage">
           <h1>{this.state.data.stats.name}</h1>
 
           <div className="StatsBar">

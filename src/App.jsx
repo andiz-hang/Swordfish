@@ -5,7 +5,7 @@ import "./App.css";
 import Banner from "./components/Banner";
 import Sidebar from "./components/Sidebar";
 // import ApiHandler from "./components/ApiHandler";
-import InfoPage from "./components/InfoPage";
+import MainPage from "./components/MainPage";
 
 class App extends Component {
   state = {
@@ -37,7 +37,7 @@ class App extends Component {
           onUpdateStock={this.handleUpdateStock}
           currentStock={this.state.currentStock}
         />
-        <InfoPage
+        <MainPage
           stock={this.state.currentStock}
           onAddStock={this.handleAddStock}
         />
