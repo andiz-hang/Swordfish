@@ -36,6 +36,24 @@ class Sidebar extends Component {
       }
     }
 
+    // DEBUG
+    sidebarItems.push(
+      <button
+        onClick={async () => {
+          const res = await fetch(
+            "https://public-api.quickfs.net/v1/usage?api_key=84560ad55be389e07b7999dbad32766e3baf7c4a"
+          );
+
+          const usage = await res.json();
+          alert(
+            `Number of API calls remaining today: ${usage["usage"]["quota"]["remaining"]}`
+          );
+        }}
+      >
+        Check remaining API Calls (DEBUG)
+      </button>
+    );
+
     return <ul className="Sidebar">{sidebarItems}</ul>;
   }
 }

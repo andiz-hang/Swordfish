@@ -39,20 +39,14 @@ class Banner extends Component {
           onKeyDown={this.onKeyPressed}
         />
 
-        <button
-          onClick={async () => {
-            const res = await fetch(
-              "https://public-api.quickfs.net/v1/usage?api_key=84560ad55be389e07b7999dbad32766e3baf7c4a"
-            );
-
-            const usage = await res.json();
-            alert(
-              `Number of API calls remaining today: ${usage["usage"]["quota"]["remaining"]}`
-            );
-          }}
-        >
-          Check remaining API Calls (DEBUG)
-        </button>
+        <ul className="nav-bar">
+          <h6 className="nav-text" onClick={() => this.props.onUpdateStock("")}>
+            Home
+          </h6>
+          <h6 className="nav-text" onClick={() => this.props.onUpdateStock("")}>
+            Info
+          </h6>
+        </ul>
       </header>
     );
   }
