@@ -20,6 +20,27 @@ class StockInfo extends Component {
     });
   }
 
+  // Returns empty BarChart if there is no data
+  // ie. Bank stocks that have no Gross or Operating Profits
+  checkNoData(data, configs, chart_title) {
+    if (data === "-") {
+      return <div className="ChartContainer" />;
+    } else {
+      return (
+        <div className="ChartContainer">
+          <h2 className={"ChartLabel"}>{chart_title}</h2>
+          <BarChart
+            id="operationalProfit"
+            chartData={configs(
+              this.state.data.years,
+              this.state.data.operating
+            )}
+          />
+        </div>
+      );
+    }
+  }
+
   componentDidMount() {
     this.updateState();
   }
@@ -64,26 +85,16 @@ class StockInfo extends Component {
                 )}
               />
             </div>
-            <div className="ChartContainer">
-              <h2 className="ChartLabel">Gross Profit</h2>
-              <BarChart
-                id="grossProfit"
-                chartData={dataFuncs.grossConfigs(
-                  this.state.data.years,
-                  this.state.data.gross
-                )}
-              />
-            </div>
-            <div className="ChartContainer">
-              <h2 className="ChartLabel">Operating Profit</h2>
-              <BarChart
-                id="operationalProfit"
-                chartData={dataFuncs.operatingConfigs(
-                  this.state.data.years,
-                  this.state.data.operating
-                )}
-              />
-            </div>
+            {this.checkNoData(
+              this.state.data.gross,
+              dataFuncs.grossConfigs,
+              "Gross Profits"
+            )}
+            {this.checkNoData(
+              this.state.data.operating,
+              dataFuncs.operatingConfigs,
+              "Operating Profit"
+            )}
             <div className="ChartContainer">
               <h2 className="ChartLabel">EPS</h2>
               <BarChart

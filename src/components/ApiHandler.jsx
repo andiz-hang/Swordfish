@@ -110,16 +110,16 @@ const apiFuncs = {
 
   getGrossProfit: async (ticker) => {
     const response = await fetch(formatString.years20("gross_profit", ticker));
-    var profits = await response.json();
-    return profits["data"];
+    var profits = await checkForErrorStatus(response);
+    return profits;
   },
 
   getOperatingProfit: async (ticker) => {
     const response = await fetch(
       formatString.years20("operating_income", ticker)
     );
-    var profits = await response.json();
-    return profits["data"];
+    var profits = await checkForErrorStatus(response);
+    return profits;
   },
 
   getEPS: async (ticker) => {

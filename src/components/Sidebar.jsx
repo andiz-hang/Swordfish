@@ -10,6 +10,7 @@ class Sidebar extends Component {
 
       // vvvvv DEBUG vvvvv
       <button
+        key={"debug"}
         onClick={async () => {
           const res = await fetch(
             "https://public-api.quickfs.net/v1/usage?api_key=84560ad55be389e07b7999dbad32766e3baf7c4a"

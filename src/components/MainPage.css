@@ -40,6 +40,10 @@
   font-size: 1.5rem;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 .DividendBar {
   display: grid;
   grid-template-columns: 1fr 2fr;
