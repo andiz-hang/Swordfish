@@ -12,6 +12,7 @@
   height: 3rem;
   border-bottom: 0.1rem solid rgb(200, 200, 200);
   align-items: center;
+  justify-content: center;
 }
 
 .sidebar-header>* {

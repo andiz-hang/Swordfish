@@ -42,15 +42,15 @@ class StockInfo extends Component {
     } else {
       return (
         <main className="MainPage">
-          <h1>{this.state.data.stats.name}</h1>
+          <h1 className="company-name">{this.state.data.stats.name}</h1>
 
           <div className="StatsBar">
-            <h1>Last Close Price: ${this.state.data.stats.price}</h1>
-            <h1>P/E Ratio: {this.state.data.stats.pe}</h1>
-            <h1>P/B Ratio: {this.state.data.stats.pb}</h1>
-            <h1>Market Cap: ${this.state.data.stats.mktCap}M</h1>
-            <h1>P/EG Ratio: {this.state.data.stats.peg}</h1>
-            <h1>Beta: {this.state.data.stats.beta}</h1>
+            <h2>Last Close Price: ${this.state.data.stats.price}</h2>
+            <h2>P/E Ratio: {this.state.data.stats.pe}</h2>
+            <h2>P/B Ratio: {this.state.data.stats.pb}</h2>
+            <h2>Market Cap: ${this.state.data.stats.mktCap}M</h2>
+            <h2>P/EG Ratio: {this.state.data.stats.peg}</h2>
+            <h2>Beta: {this.state.data.stats.beta}</h2>
           </div>
 
           <div className="GraphDisplayPanel">
@@ -117,7 +117,7 @@ class StockInfo extends Component {
           </div>
 
           <button onClick={() => this.props.onAddStock(this.props.stock)}>
-            Add Stock to List
+            Add to Common Stocks List
           </button>
         </main>
       );
