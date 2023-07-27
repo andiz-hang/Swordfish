@@ -48,3 +48,17 @@
 .DividendBar>h1 {
   font-size: 1.5rem;
 }
+
+.add-to-list-button {
+  background-color: lightblue;
+  /* text-decoration: underline; */
+  font-weight: 600;
+
+  padding: 0.5rem 1rem;
+  border-radius: 10rem;
+  border: none
+}
+
+.add-to-list-button:hover {
+  background-color: rgb(160, 199, 214);
+}

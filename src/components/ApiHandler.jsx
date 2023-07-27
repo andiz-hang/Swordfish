@@ -23,7 +23,7 @@ const apiFuncs = {
   getStatsTEST: async (ticker) => {
     if (ticker === "AAPL") {
       return {
-        name: "Apple",
+        name: "Apple Inc",
         price: 1000,
         pe: 2.1,
         pb: 3.0,

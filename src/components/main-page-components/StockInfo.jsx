@@ -116,7 +116,10 @@ class StockInfo extends Component {
             </div>
           </div>
 
-          <button onClick={() => this.props.onAddStock(this.props.stock)}>
+          <button
+            className="add-to-list-button"
+            onClick={() => this.props.onAddStock(this.props.stock)}
+          >
             Add to Common Stocks List
           </button>
         </main>
