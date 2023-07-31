@@ -4,12 +4,11 @@ import "./App.css";
 
 import Banner from "./components/Banner";
 import Sidebar from "./components/Sidebar";
-// import ApiHandler from "./components/ApiHandler";
 import MainPage from "./components/MainPage";
 
 class App extends Component {
   state = {
-    sidebarStocks: ["AAPL", "TSLA"],
+    sidebarStocks: ["AAPL", "MSFT", "META", "NVDA", "TSLA", "SHOP:CA"],
     currentStock: "",
     currentMainPage: "Home",
   };
@@ -35,7 +34,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Banner onUpdatePage={this.handleUpdatePage} />
+        <Banner
+          onUpdatePage={this.handleUpdatePage}
+          page={this.state.currentMainPage}
+        />
         <Sidebar
           stocks={this.state.sidebarStocks}
           currentStock={this.state.currentStock}
@@ -45,6 +47,7 @@ class App extends Component {
           stock={this.state.currentStock}
           page={this.state.currentMainPage}
           onAddStock={this.handleAddStock}
+          onUpdatePage={this.handleUpdatePage}
         />
       </div>
     );

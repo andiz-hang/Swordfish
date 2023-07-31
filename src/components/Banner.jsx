@@ -10,6 +10,37 @@ class Banner extends Component {
     this.onKeyPressed = this.onKeyPressed.bind(this);
   }
 
+  // For the purposes of showing which nav is being selected. eg. if the Home page is selected, underline the Home button
+  getNavLinks() {
+    const link_names = ["Home", "Info"];
+    const links = [];
+    for (const page in link_names) {
+      if (this.props.page === link_names[page]) {
+        links.push(
+          <h6
+            key={link_names[page]}
+            className="nav-text nav-selected"
+            onClick={() => this.props.onUpdatePage(link_names[page], "")}
+          >
+            {link_names[page]}
+          </h6>
+        );
+      } else {
+        links.push(
+          <h6
+            key={link_names[page]}
+            className="nav-text"
+            onClick={() => this.props.onUpdatePage(link_names[page], "")}
+          >
+            {link_names[page]}
+          </h6>
+        );
+      }
+    }
+
+    return links;
+  }
+
   updateInput(e) {
     this.setState({ searchBarInput: e.target.value });
   }
@@ -27,31 +58,16 @@ class Banner extends Component {
           className="banner-pagename"
           onClick={() => this.props.onUpdatePage("Home", "")}
         >
-          A Good App Name
+          Swordfish
         </div>
-
         <input
           className="search-bar"
           type="text"
-          placeholder="Enter Stock Ticker, ex: AAPL"
+          placeholder="Enter stock ticker, then click the 'Enter' key"
           onChange={this.updateInput}
           onKeyDown={this.onKeyPressed}
         />
-
-        <ul className="nav-bar">
-          <h6
-            className="nav-text"
-            onClick={() => this.props.onUpdatePage("Home", "")}
-          >
-            Home
-          </h6>
-          <h6
-            className="nav-text"
-            onClick={() => this.props.onUpdatePage("Info", "")}
-          >
-            Info
-          </h6>
-        </ul>
+        <ul className="nav-bar">{this.getNavLinks()}</ul>;
       </header>
     );
   }

@@ -34,7 +34,7 @@ class Sidebar extends Component {
         sidebarItems.push(
           <li
             key={stockName}
-            className="sidebar-item selected"
+            className="sidebar-item sidebar-selected"
             onClick={() => this.props.onUpdatePage("StockInfo", stockName)}
           >
             <span>{stockName}</span>

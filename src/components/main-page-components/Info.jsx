@@ -5,18 +5,13 @@ class Info extends Component {
   render() {
     return (
       <main className="MainPage">
-        <h1>This is the Info Page</h1>
-
-        <h1>Please read before proceeding!</h1>
+        <h1>Tips and Warnings</h1>
         <ul>
-          <li>Bank/Insurance Stocks</li>
-          <li>Api Daily Limit</li>
-          <li>Stock list refresh</li>
           <li>
             <p>
               The app will search for companies listed on US exchanges by
               default. To search for companies listed on other exchanges, add
-              the country code after the ticker symbol in the search bar
+              the country code after the ticker symbol in the search bar.
             </p>
             <p>The supported countries are:</p>
             <ul>
@@ -27,6 +22,18 @@ class Info extends Component {
               <li>United Kingdom (:LN)</li>
             </ul>
             <p>Examples: "T:CA", "GFNORTEO:MM"</p>
+          </li>
+          <li>
+            Some companies will not have applicable data available. Notably,
+            banking and insurance companies do not report profits.
+          </li>
+          <li>
+            The Common Stocks list will be reset if the page is refreshed.
+          </li>
+          <li>
+            The API being used has a limited amount of calls available per day.
+            If there is no data showing, it may be because the daily limit has
+            been reached.
           </li>
         </ul>
       </main>

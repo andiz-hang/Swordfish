@@ -19,7 +19,7 @@ class MainPage extends Component {
       return <Info />;
     } else {
       // if (this.props.page) is some weird unexpected value, default to the Home Page
-      return <Home />;
+      return <Home onUpdatePage={this.props.onUpdatePage} />;
     }
   }
 }

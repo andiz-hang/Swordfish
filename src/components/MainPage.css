@@ -2,6 +2,23 @@
   padding: 1rem;
 }
 
+.home-description {
+  font-style: italic; 
+  text-indent: 3rem;
+  margin: 2rem 0;
+}
+
+.to-info-button {
+  border: none;
+  background: none;
+  text-decoration: underline;
+  color: blue;
+}
+
+.to-info-button:hover {
+  color: darkblue;
+}
+
 .company-name {
   font-weight: 400;
   font-size: 2.5rem;

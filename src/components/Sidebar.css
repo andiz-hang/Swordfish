@@ -37,8 +37,9 @@
   cursor: pointer;
 }
 
-.selected {
+.sidebar-selected {
   font-weight: bold;
   background: linear-gradient(to left, lightblue 50%, lightgray 50%) right;
   background-size: 200%;
+  text-decoration: underline;
 }
