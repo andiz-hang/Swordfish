@@ -46,9 +46,15 @@ class Banner extends Component {
   }
 
   onKeyPressed(key) {
-    if (key.keyCode === 13) {
+    if (key.keyCode === 13 && this.state.searchBarInput === "") {
+      this.alertEmptySearchBar();
+    } else if (key.keyCode === 13) {
       this.props.onUpdatePage("StockInfo", this.state.searchBarInput);
     }
+  }
+
+  alertEmptySearchBar() {
+    alert("Error: Please type a ticker symbol into the search bar");
   }
 
   render() {
@@ -64,15 +70,19 @@ class Banner extends Component {
           <input
             className="search-bar"
             type="text"
-            placeholder="Enter stock ticker, then click the 'Enter' key"
+            placeholder="Enter stock ticker, then click 'Search'"
             onChange={this.updateInput}
             onKeyDown={this.onKeyPressed}
           />
           <button
             className="search-button"
-            onClick={() =>
-              this.props.onUpdatePage("StockInfo", this.state.searchBarInput)
-            }
+            onClick={() => {
+              if (this.state.searchBarInput === "") {
+                this.alertEmptySearchBar();
+              } else {
+                this.props.onUpdatePage("StockInfo", this.state.searchBarInput);
+              }
+            }}
           >
             Search
           </button>

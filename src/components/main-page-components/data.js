@@ -104,6 +104,10 @@ export const dataFuncs = {
 
 export async function getData(ticker) {
   return await getAPIData(ticker).then((x) => {
+    if (x.hasOwnProperty("error")) {
+      return x;
+    }
+
     x["stats"]["price"] = numberWithCommas(x["stats"]["price"]);
     x["stats"]["mktCap"] = numberWithCommas(x["stats"]["mktCap"]);
 
