@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Swordfish is a financial data visualization web application. It retrieves data from financial statements and presents it in aesthetically pleasing and intuitive charts.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
