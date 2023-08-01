@@ -10,10 +10,6 @@ class StockInfo extends Component {
 
   updateState() {
     getData(this.props.stock).then((res) => {
-      if (res.hasOwnProperty("error")) {
-        this.props.onUpdatePage("Error", "");
-      }
-
       this.setState({ data: res, isDataLoading: false });
     });
   }
