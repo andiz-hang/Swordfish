@@ -6,9 +6,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## App setup
 
-1.  Download Node.js from the official website: https://nodejs.org/en/
+1.  Clone the repository onto your local machine.
 
-2.  Clone the repository onto your local machine.
+2.  Download Node.js from the official website: https://nodejs.org/en/
 
 3.  Install the node packages
 
