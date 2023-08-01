@@ -5,7 +5,7 @@ class Info extends Component {
   render() {
     return (
       <main className="MainPage">
-        <h1>Tips and Warnings</h1>
+        <h1>Important Notes</h1>
         <ul>
           <li>
             <p>

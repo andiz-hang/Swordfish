@@ -25,13 +25,24 @@
 }
 
 .search-bar {
-  margin: 1.5rem 1rem;
+  margin: 1.5rem .2rem 1.5rem 1rem;
   width: 25rem;
   border: 0.2rem solid rgb(60, 60, 60);
 }
 
 .search-bar:hover {
   border: 0.2rem solid rgb(120, 120, 120);
+}
+
+.search-button {
+  border-radius: 0 0.5rem 0.5rem 0;
+  border: none;
+  background-color: lightblue;
+  font-weight: 600;
+}
+
+.search-button:hover {
+  background-color: rgb(160, 199, 214);
 }
 
 .nav-bar {

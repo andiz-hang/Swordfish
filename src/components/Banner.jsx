@@ -10,7 +10,7 @@ class Banner extends Component {
     this.onKeyPressed = this.onKeyPressed.bind(this);
   }
 
-  // For the purposes of showing which nav is being selected. eg. if the Home page is selected, underline the Home button
+  // For the purposes of showing which nav is being selected. eg. if the Home page is selected, underline the Home button in the NavList
   getNavLinks() {
     const link_names = ["Home", "Info"];
     const links = [];
@@ -60,13 +60,23 @@ class Banner extends Component {
         >
           Swordfish
         </div>
-        <input
-          className="search-bar"
-          type="text"
-          placeholder="Enter stock ticker, then click the 'Enter' key"
-          onChange={this.updateInput}
-          onKeyDown={this.onKeyPressed}
-        />
+        <div className="search-bar-area">
+          <input
+            className="search-bar"
+            type="text"
+            placeholder="Enter stock ticker, then click the 'Enter' key"
+            onChange={this.updateInput}
+            onKeyDown={this.onKeyPressed}
+          />
+          <button
+            className="search-button"
+            onClick={() =>
+              this.props.onUpdatePage("StockInfo", this.state.searchBarInput)
+            }
+          >
+            Search
+          </button>
+        </div>
         <ul className="nav-bar">{this.getNavLinks()}</ul>;
       </header>
     );
