@@ -1,9 +1,13 @@
 import { getAPIData } from "../ApiHandler";
 
+// This is where all the background calculations and data formatting is made. 
+
+// Returns num, but with all the thousands separator commas in place.
 function numberWithCommas(num) {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+// Object with the chart configs for each metric
 export const dataFuncs = {
   revenueConfigs: (years, data) => {
     const settings = {
@@ -102,6 +106,7 @@ export const dataFuncs = {
   },
 };
 
+// Get the data, but format the price and market cap to be with thousands separators
 export async function getData(ticker) {
   return await getAPIData(ticker).then((x) => {
     x["stats"]["price"] = numberWithCommas(x["stats"]["price"]);

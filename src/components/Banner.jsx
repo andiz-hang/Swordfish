@@ -1,8 +1,8 @@
 import "./Banner.css";
 import React, { Component } from "react";
-
 import { doesCompanyExist } from "./ApiHandler.jsx";
 
+// Error alerts. They are in an object so that the code is more easily collapsible in the text editor
 const alerts = {
   alertEmptySearchBar: () =>
     alert("Error: Please type a ticker symbol into the search bar"),
@@ -15,11 +15,12 @@ class Banner extends Component {
     super();
     this.state = { searchBarInput: "" };
 
+    // Need to bind these event handlers because they originate from a parent component
     this.updateInput = this.updateInput.bind(this);
     this.onKeyPressed = this.onKeyPressed.bind(this);
   }
 
-  // For the purposes of showing which nav is being selected. eg. if the Home page is selected, underline the Home button in the NavList
+  // For the purposes of showing which nav is being selected. eg. if the Home page is selected, underline and bold the Home button in the NavList
   getNavLinks() {
     const link_names = ["Home", "Info"];
     const links = [];
@@ -50,10 +51,15 @@ class Banner extends Component {
     return links;
   }
 
+  // Handle whenever the search bar is updated
   updateInput(e) {
     this.setState({ searchBarInput: e.target.value });
   }
 
+  // Does two things:
+  // 1. Check if ticker is an empty string
+  // 2. Check if ticker is a real company
+  // Throws an error alert if either are true. Otherwise, update the MainPage
   async searchCompany(ticker) {
     if (ticker === "") {
       alerts.alertEmptySearchBar();
@@ -71,6 +77,7 @@ class Banner extends Component {
     }
   }
 
+  // Check whether the key pressed in the search bar is the "Enter" key. If so, searchCompany
   onKeyPressed(key) {
     if (key.keyCode !== 13) {
       return;
@@ -82,12 +89,18 @@ class Banner extends Component {
   render() {
     return (
       <header className="Banner">
+        {
+          // The name of the app. Clicking on it goes to the Home page.
+        }
         <div
           className="banner-pagename"
           onClick={() => this.props.onUpdatePage("Home", "")}
         >
           Swordfish
         </div>
+        {
+          // The search bar, where users search for companies via their ticker symbol. Clicking "Enter" or the "Search" button searches for the company, or throws an error if the company is empty string or the company ticker symbol doesn't exist.
+        }
         <div className="search-bar-area">
           <input
             className="search-bar"
@@ -104,6 +117,9 @@ class Banner extends Component {
             Search
           </button>
         </div>
+        {
+          // The Nav Bar, currently has a Home and Info tab.
+        }
         <ul className="nav-bar">{this.getNavLinks()}</ul>;
       </header>
     );

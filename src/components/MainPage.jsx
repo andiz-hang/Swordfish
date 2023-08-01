@@ -5,6 +5,7 @@ import Home from "./main-page-components/Home.jsx";
 import Info from "./main-page-components/Info.jsx";
 import StockInfo from "./main-page-components/StockInfo.jsx";
 
+// Display a different page depending on the ui buttons pressed
 class MainPage extends Component {
   render() {
     if (this.props.page === "StockInfo") {

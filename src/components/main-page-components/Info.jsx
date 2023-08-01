@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+// NOTE: CSS styling for this component is found in MainPage.css
 class Info extends Component {
   // state = {  }
   render() {

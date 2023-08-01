@@ -2,26 +2,39 @@ import React, { Component } from "react";
 import { BarChart, LineChart } from "./charts";
 import { dataFuncs, getData } from "./data";
 
+// NOTE: CSS styling for this component is found in MainPage.css
 class StockInfo extends Component {
   state = {
     data: {},
+
+    // Indicates whether or not the data from the API has arrived (is the data still loading?).
+    // This is to prevent the premature loading of the page.
     isDataLoading: true,
   };
 
+  componentDidMount() {
+    this.updateState();
+  }
+
+  componentDidUpdate(prevProps) {
+    // 'if' check is neccesary!!!
+    if (prevProps.stock !== this.props.stock) {
+      this.updateState();
+    }
+  }
+
+  // Runs whenever the component Mounts or Updates. Gets the data, then indicate the data has loaded.
   updateState() {
+    this.setState({ isDataLoading: true });
+
     getData(this.props.stock).then((res) => {
       this.setState({ data: res, isDataLoading: false });
     });
   }
 
-  resetState() {
-    this.setState({
-      isDataLoading: true,
-    });
-  }
-
   // Returns empty BarChart if there is no data
   // ie. Bank stocks that have no Gross or Operating Profits
+  // Otherwise, returns a chart with the correct data
   checkNoData(data, configs, chart_title) {
     if (data === "-") {
       return <div className="ChartContainer" />;
@@ -41,19 +54,9 @@ class StockInfo extends Component {
     }
   }
 
-  componentDidMount() {
-    this.updateState();
-  }
-
-  componentDidUpdate(prevProps) {
-    // LINE BELOW IS NECESSARY!!!
-    if (prevProps.stock !== this.props.stock) {
-      this.resetState();
-      this.updateState();
-    }
-  }
-
   render() {
+    console.log("Render!!!");
+    // If the data hasn't loaded yet, display a 'Retrieving Financial Data' page.
     if (this.state.isDataLoading) {
       return (
         <main className="MainPage">
@@ -61,6 +64,7 @@ class StockInfo extends Component {
         </main>
       );
     } else {
+      // Once data has loaded, render page
       return (
         <main className="MainPage">
           <h1 className="company-name">{this.state.data.stats.name}</h1>
@@ -127,6 +131,9 @@ class StockInfo extends Component {
             </div>
           </div>
 
+          {
+            // Button to add current stock to the Sidebar
+          }
           <button
             className="add-to-list-button"
             onClick={() => this.props.onAddStock(this.props.stock)}

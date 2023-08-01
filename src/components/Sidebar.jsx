@@ -7,7 +7,8 @@ class Sidebar extends Component {
       <li key="header" className="sidebar-header">
         <span>Common Stocks</span>
       </li>,
-      // // vvvvv DEBUG vvvvv
+      // // A button for DEBUGGING only. When clicked, checks how many QuickFS API calls
+      // // remain for the day. 500 API calls per day.
       // <button
       //   key={"debug"}
       //   onClick={async () => {

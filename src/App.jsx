@@ -1,18 +1,19 @@
 import React, { Component } from "react";
-
 import "./App.css";
-
 import Banner from "./components/Banner";
 import Sidebar from "./components/Sidebar";
 import MainPage from "./components/MainPage";
 
 class App extends Component {
   state = {
+    // Sidebar is initially populated by these stocks
     sidebarStocks: ["AAPL", "MSFT", "META", "NVDA", "TSLA", "SHOP:CA"],
     currentStock: "",
+    // Home page is loaded by deafult
     currentMainPage: "Home",
   };
 
+  // Used whenever the page is updated. This function is sent to several child components
   handleUpdatePage = (page, ticker) => {
     this.setState({
       currentMainPage: page,
@@ -20,6 +21,7 @@ class App extends Component {
     });
   };
 
+  // Used whenever a stock is added to the Sidebar.
   handleAddStock = (ticker) => {
     const currentStocks = this.state.sidebarStocks;
     if (currentStocks.includes(ticker)) {
