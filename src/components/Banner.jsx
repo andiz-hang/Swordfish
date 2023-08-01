@@ -1,6 +1,15 @@
 import "./Banner.css";
 import React, { Component } from "react";
 
+import { doesCompanyExist } from "./ApiHandler.jsx";
+
+const alerts = {
+  alertEmptySearchBar: () =>
+    alert("Error: Please type a ticker symbol into the search bar"),
+  alertCompanyDoesNotExist: (ticker) =>
+    alert(`Error: '${ticker}' does not exist. Please try again.`),
+};
+
 class Banner extends Component {
   constructor() {
     super();
@@ -45,16 +54,29 @@ class Banner extends Component {
     this.setState({ searchBarInput: e.target.value });
   }
 
-  onKeyPressed(key) {
-    if (key.keyCode === 13 && this.state.searchBarInput === "") {
-      this.alertEmptySearchBar();
-    } else if (key.keyCode === 13) {
-      this.props.onUpdatePage("StockInfo", this.state.searchBarInput);
+  async searchCompany(ticker) {
+    if (ticker === "") {
+      alerts.alertEmptySearchBar();
+      return;
+    }
+
+    const exists = await doesCompanyExist(ticker);
+
+    if (!exists) {
+      alerts.alertCompanyDoesNotExist(ticker);
+      return;
+      // Must be in an 'else' statement, otherwise, will not work due to Promises.
+    } else {
+      this.props.onUpdatePage("StockInfo", ticker);
     }
   }
 
-  alertEmptySearchBar() {
-    alert("Error: Please type a ticker symbol into the search bar");
+  onKeyPressed(key) {
+    if (key.keyCode !== 13) {
+      return;
+    }
+
+    return this.searchCompany(this.state.searchBarInput);
   }
 
   render() {
@@ -71,18 +93,13 @@ class Banner extends Component {
             className="search-bar"
             type="text"
             placeholder="Enter stock ticker, then click 'Search'"
+            // Warning: Do not change the two lines below
             onChange={this.updateInput}
             onKeyDown={this.onKeyPressed}
           />
           <button
             className="search-button"
-            onClick={() => {
-              if (this.state.searchBarInput === "") {
-                this.alertEmptySearchBar();
-              } else {
-                this.props.onUpdatePage("StockInfo", this.state.searchBarInput);
-              }
-            }}
+            onClick={() => this.searchCompany(this.state.searchBarInput)}
           >
             Search
           </button>

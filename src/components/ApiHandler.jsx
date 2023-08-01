@@ -19,6 +19,17 @@ async function checkForErrorStatus(res) {
   }
 }
 
+export async function doesCompanyExist(ticker) {
+  const responseName = await fetch(formatString.default("name", ticker));
+  const res = await responseName.json();
+
+  if (res.hasOwnProperty("errors")) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 // helper functions go in here
 const apiFuncs = {
   getStatsTEST: async (ticker) => {
