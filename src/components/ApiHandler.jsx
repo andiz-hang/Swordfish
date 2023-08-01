@@ -8,27 +8,6 @@ const formatString = {
   },
 };
 
-// UNFINISHED
-async function defaultBatchRequest(ticker) {
-  const data = {
-    name: `QFS(${ticker},name)`,
-    price: `QFS(${ticker},price)`,
-    pe: `QFS(${ticker},pe)`,
-    pb: `QFS(${ticker},pb)`,
-    mkt_cap: `QFS(${ticker},mkt_cap)`,
-    peg: `QFS(${ticker},peg)`,
-    beta: `QFS(${ticker},beta)`,
-  };
-
-  const req = new Request("https://public-api.quickfs.net/v1/data/batch", {
-    method: "POST",
-    headers: { "x-qfs-api-key": "84560ad55be389e07b7999dbad32766e3baf7c4a" },
-    body: { data },
-  });
-
-  return await fetch(req);
-}
-
 // Look for empty data
 async function checkForErrorStatus(res) {
   const json = await res.json();

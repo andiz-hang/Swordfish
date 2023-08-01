@@ -41,8 +41,6 @@ class StockInfo extends Component {
     }
   }
 
-  checkCompanyExists() {}
-
   componentDidMount() {
     this.updateState();
   }
