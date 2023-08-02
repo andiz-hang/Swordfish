@@ -55,7 +55,6 @@ class StockInfo extends Component {
   }
 
   render() {
-    console.log("Render!!!");
     // If the data hasn't loaded yet, display a 'Retrieving Financial Data' page.
     if (this.state.isDataLoading) {
       return (

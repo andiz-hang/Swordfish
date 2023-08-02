@@ -37,6 +37,12 @@ class Info extends Component {
             been reached.
           </li>
         </ul>
+        <p>
+          To begin, please click on one of the companies listed in the Common
+          Stocks list located on the left. Alternatively, you can also search
+          for a stock by typing in the company's ticker symbol in the search box
+          located at the top.
+        </p>
       </main>
     );
   }

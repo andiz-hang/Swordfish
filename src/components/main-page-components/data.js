@@ -1,108 +1,38 @@
 import { getAPIData } from "../ApiHandler";
+import { dataConfigs } from "./charts";
 
-// This is where all the background calculations and data formatting is made. 
+// This is where all the background calculations and chart data formatting is made. 
 
 // Returns num, but with all the thousands separator commas in place.
 function numberWithCommas(num) {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+};
+
 
 // Object with the chart configs for each metric
 export const dataFuncs = {
   revenueConfigs: (years, data) => {
-    const settings = {
-      // labels are filled with years in StockInfo.jsx
-      labels: years,
-      datasets: [
-        {
-          label: "Revenue (Millions of $)",
-          id: 1,
-          data: data.map((r) => r / 1000000),
-          backgroundColor: "rgba(43, 217, 255)",
-        }
-      ],
-    }
-    return settings;
+    return dataConfigs("Annual Revenue (Millions of $)", years, data.map((r) => r / 1000000), "rgba(43, 217, 255)");
   },
 
   grossConfigs: (years, data) => {
-    const settings = {
-      // labels are filled with years in StockInfo.jsx
-      labels: years,
-      datasets: [
-        {
-          label: "Profit (Millions of $)",
-          id: 1,
-          data: data.map((x) => x / 1000000),
-          backgroundColor: "rgba(230, 216, 32)",
-        }
-      ],
-    }
-    return settings;
+    return dataConfigs("Profit (Millions of $)", years, data.map((r) => r / 1000000), "rgba(230, 216, 32)", true);
   },
 
   operatingConfigs: (years, data) => {
-    const settings = {
-      // labels are filled with years in StockInfo.jsx
-      labels: years,
-      datasets: [
-        {
-          label: "Profit (Millions of $)",
-          id: 1,
-          data: data.map((x) => x / 1000000),
-          backgroundColor: "rgba(209, 28, 0)",
-        }
-      ],
-    }
-    return settings;
+    return dataConfigs("Profit (Millions of $)", years, data.map((r) => r / 1000000), "rgba(209, 28, 0)", true);
   },
 
   epsConfigs: (years, data) => {
-    const settings = {
-      // labels are filled with years in StockInfo.jsx
-      labels: years,
-      datasets: [
-        {
-          label: "Earnings ($ per share)",
-          id: 1,
-          data: data,
-          backgroundColor: "rgba(250, 180, 67)",
-        },
-      ],
-    }
-    return settings;
+    return dataConfigs("Earnings ($ per share)", years, data, "rgba(250, 180, 67)", true);
   },
 
   dividendsConfigs: (years, data) => {
-    const settings = {
-      // labels are filled with years in StockInfo.jsx
-      labels: years,
-      datasets: [
-        {
-          label: "Dividends ($ per Share)",
-          id: 1,
-          data: data,
-          backgroundColor: "rgba(0, 171, 46)",
-        },
-      ],
-    }
-    return settings;
+    return dataConfigs("Dividends ($ per Share)", years, data, "rgba(0, 171, 46)", true);
   },
 
   roicConfigs: (years, data) => {
-    const settings = {
-      // labels are filled with years in StockInfo.jsx
-      labels: years,
-      datasets: [
-        {
-          label: "Return on Invested Capital (%)",
-          id: 1,
-          data: data.map((x) => x * 100),
-          backgroundColor: "rgba(138, 28, 255)",
-        },
-      ],
-    }
-    return settings;
+    return dataConfigs("Return on Invested Capital (%)", years, data.map((x) => x * 100), "rgba(138, 28, 255)", false, 2);
   },
 };
 
