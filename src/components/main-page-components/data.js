@@ -12,7 +12,7 @@ function numberWithCommas(num) {
 // Object with the chart configs for each metric
 export const dataFuncs = {
   revenueConfigs: (years, data) => {
-    return dataConfigs("Annual Revenue (Millions of $)", years, data.map((r) => r / 1000000), "rgba(43, 217, 255)");
+    return dataConfigs("Annual Revenue (Millions of $)", years, data.map((r) => r / 1000000), "rgba(43, 217, 255)", true);
   },
 
   grossConfigs: (years, data) => {
@@ -24,15 +24,15 @@ export const dataFuncs = {
   },
 
   epsConfigs: (years, data) => {
-    return dataConfigs("Earnings ($ per share)", years, data, "rgba(250, 180, 67)", true);
+    return dataConfigs("Earnings ($ per share)", years, data, "rgba(250, 180, 67)", true, 2);
   },
 
   dividendsConfigs: (years, data) => {
-    return dataConfigs("Dividends ($ per Share)", years, data, "rgba(0, 171, 46)", true);
+    return dataConfigs("Dividends ($ per Share)", years, data, "rgba(0, 171, 46)", true, 2);
   },
 
   roicConfigs: (years, data) => {
-    return dataConfigs("Return on Invested Capital (%)", years, data.map((x) => x * 100), "rgba(138, 28, 255)", false, 2);
+    return dataConfigs("Return on Invested Capital (%)", years, data.map((x) => x * 100), "rgba(138, 28, 255)", false, 2, true);
   },
 };
 

@@ -3,14 +3,16 @@
 }
 
 .home-description {
+  margin: 2rem 0;
+
   font-style: italic; 
   text-indent: 3rem;
-  margin: 2rem 0;
 }
 
 .to-info-button {
-  border: none;
   background: none;
+  border: none;
+
   text-decoration: underline;
   color: blue;
 }
@@ -29,15 +31,14 @@
   flex-wrap: wrap;
   align-content: space-evenly;
 
+  height: 5rem;
   background-color: lightblue;
   padding: 0rem 1rem;
-
-  height: 5rem;
 }
 
 .StatsBar>h2 {
-  font-size: 1.2rem;
   width: 24rem;
+  font-size: 1.2rem;
   margin: 0;
 }
 
@@ -54,19 +55,6 @@
 }
 
 .ChartLabel {
-  font-size: 1.5rem;
-}
-
-.invisible {
-  visibility: hidden;
-}
-
-.DividendBar {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-}
-
-.DividendBar>h1 {
   font-size: 1.5rem;
 }
 

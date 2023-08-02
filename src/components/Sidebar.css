@@ -1,17 +1,19 @@
 .Sidebar {
-  border-right: .1rem solid rgb(200, 200, 200);
   list-style-type: none;
+  overflow: auto;
   margin: 0;
   padding: 0;
-  overflow: auto;
+  border-right: .1rem solid rgb(200, 200, 200);
 }
 
 .sidebar-header {
   display: flex;  
-  height: 3rem;
-  border-bottom: .1rem solid rgb(200, 200, 200);
   align-items: center;
   justify-content: center;
+
+  height: 3rem;
+  border-bottom: .1rem solid rgb(200, 200, 200);
+
   font-weight: bold;
   text-decoration: underline;
 }
@@ -23,10 +25,12 @@
 
 .sidebar-item {
   display: flex;
-  height: 4rem;
-  border-bottom: .1rem solid rgb(200, 200, 200);
   align-items: center;
   justify-content: center;
+
+  height: 4rem;
+  border-bottom: .1rem solid rgb(200, 200, 200);
+  
   font-size: .8rem;
 
   background: linear-gradient(to left, white 50%, lightgray 50%) right;

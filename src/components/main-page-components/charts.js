@@ -12,7 +12,7 @@ function numberWithCommas(num) {
 };
 
 // Configs for charts
-export function dataConfigs(label, years, data, color, dollar_signs=false, precision=0) {
+export function dataConfigs(label, years, data, color, dollar_signs=false, precision=0, percent=false) {
   const configs = {
     data: {
       labels: years,
@@ -54,6 +54,15 @@ export function dataConfigs(label, years, data, color, dollar_signs=false, preci
     }
   }
 
+  if (percent) {
+    configs.options.scales.y.ticks = {
+      // Include a dollar sign in the ticks
+      callback: function(value, index, ticks) {
+          return numberWithCommas(value.toFixed(2) + '%');
+      }
+    }
+  }
+
   return configs;
 };
 
@@ -74,22 +83,3 @@ export const LineChart = (props) => {
     />
   );
 };
-
-// CHART FOR TESTING PURPOSES ONLY
-// export const TestChart = () => {
-//   return (
-//     <Line
-//       // datasetIdKey='id'
-//       data={{
-//         labels: ["2022","2021","2020","2019","2018"],
-//         datasets: [
-//           {
-//             id: 1,
-//             label: '',
-//             data: [111443,92953,73365,58896,64121],
-//           },
-//         ],
-//       }}
-//     />
-//   );
-// };

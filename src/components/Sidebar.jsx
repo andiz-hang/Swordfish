@@ -8,6 +8,9 @@ class Sidebar extends Component {
         <span>Common Stocks</span>
       </li>,
       <li key="separator" className="sidebar-separator" />,
+
+      // DO NOT DELETE COMMENT
+
       // // A button for DEBUGGING only. When clicked, checks how many QuickFS API calls
       // // remain for the day. 500 API calls per day.
       // <button

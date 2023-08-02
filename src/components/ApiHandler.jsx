@@ -8,7 +8,7 @@ const formatString = {
   },
 };
 
-// Look for empty data
+// Look for empty data for charts
 async function checkForErrorStatus(res) {
   const json = await res.json();
 
@@ -19,6 +19,8 @@ async function checkForErrorStatus(res) {
   }
 }
 
+// Check if a company ticker exists.
+// Done by checking whether or not there are errors when getting a company's name
 export async function doesCompanyExist(ticker) {
   const responseName = await fetch(formatString.default("name", ticker));
   const res = await responseName.json();
@@ -30,7 +32,9 @@ export async function doesCompanyExist(ticker) {
   }
 }
 
-// helper functions go in here
+// API call functions
+// Could have used Batch QuickFS api calls,
+// but too much work to change entire architecture for little gain.
 const apiFuncs = {
   getStatsTEST: async (ticker) => {
     if (ticker === "AAPL") {
@@ -162,26 +166,25 @@ const apiFuncs = {
 };
 
 export async function getAPIData(ticker) {
-  // const stats = await apiFuncs.getStats(ticker);
-  // if (stats.hasOwnProperty("error")) {
-  //   return stats;
-  // }
-  // const years = await apiFuncs.getYears(ticker);
-  // const revenue = await apiFuncs.getRevenue(ticker);
-  // const gross = await apiFuncs.getGrossProfit(ticker);
-  // const operating = await apiFuncs.getOperatingProfit(ticker);
-  // const eps = await apiFuncs.getEPS(ticker);
-  // const dividends = await apiFuncs.getDividends(ticker);
-  // const roic = await apiFuncs.getROIC(ticker);
+  const stats = await apiFuncs.getStats(ticker);
+  const years = await apiFuncs.getYears(ticker);
+  const revenue = await apiFuncs.getRevenue(ticker);
+  const gross = await apiFuncs.getGrossProfit(ticker);
+  const operating = await apiFuncs.getOperatingProfit(ticker);
+  const eps = await apiFuncs.getEPS(ticker);
+  const dividends = await apiFuncs.getDividends(ticker);
+  const roic = await apiFuncs.getROIC(ticker);
 
-  const stats = await apiFuncs.getStatsTEST(ticker);
-  const years = await apiFuncs.getYearsTEST(ticker);
-  const revenue = await apiFuncs.getDataTEST(ticker);
-  const gross = await apiFuncs.getDataTEST(ticker);
-  const operating = await apiFuncs.getDataTEST(ticker);
-  const eps = await apiFuncs.getDataTEST(ticker);
-  const dividends = await apiFuncs.getDataTEST(ticker);
-  const roic = await apiFuncs.getROICTEST(ticker);
+  // // For Testing purposes. Uncomment these lines and comment out lines above to prevent wasting
+  // // Api calls.
+  // const stats = await apiFuncs.getStatsTEST(ticker);
+  // const years = await apiFuncs.getYearsTEST(ticker);
+  // const revenue = await apiFuncs.getDataTEST(ticker);
+  // const gross = await apiFuncs.getDataTEST(ticker);
+  // const operating = await apiFuncs.getDataTEST(ticker);
+  // const eps = await apiFuncs.getDataTEST(ticker);
+  // const dividends = await apiFuncs.getDataTEST(ticker);
+  // const roic = await apiFuncs.getROICTEST(ticker);
 
   return {
     years: years,
