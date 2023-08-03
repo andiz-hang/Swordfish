@@ -43,6 +43,12 @@ class Info extends Component {
           for a stock by typing in the company's ticker symbol in the search box
           located at the top.
         </p>
+        <h1>About this App</h1>
+        <p>
+          Swordfish was made and is maintained by Andi Zhang. It was created
+          using the React.js and Node.js frameworks. It uses QuickFS API as its
+          databank for financial data.
+        </p>
       </main>
     );
   }
